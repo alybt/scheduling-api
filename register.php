@@ -76,13 +76,10 @@ try {
     $name_stmt->execute();
     $name_ID = $conn->insert_id;
 
-    // Hash password
-    $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-
-    // Insert into person table
+    // Insert into person table (plain text password)
     $person_query = "INSERT INTO person (person_username, person_password, account_ID, name_ID) VALUES (?, ?, ?, ?)";
     $person_stmt = $conn->prepare($person_query);
-    $person_stmt->bind_param("ssii", $username, $hashed_password, $account_ID, $name_ID);
+    $person_stmt->bind_param("ssii", $username, $password, $account_ID, $name_ID);
     $person_stmt->execute();
     $person_ID = $conn->insert_id;
 
