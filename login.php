@@ -1,84 +1,63 @@
 <?php
-require_once 'config.php';
+header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: POST');
+header('Access-Control-Allow-Headers: Content-Type');
 
-// Only allow POST requests
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(405);
-    echo json_encode(['success' => false, 'message' => 'Method not allowed']);
+date_default_timezone_set('Asia/Manila');
+
+$conn = new mysqli("localhost", "root", "", "scheduling-system");
+
+if ($conn->connect_error) {
+    echo json_encode(["status" => "error", "message" => $conn->connect_error]);
     exit();
 }
 
-// Get POST data
-$data = json_decode(file_get_contents("php://input"), true);
+// Read JSON input
+$input = json_decode(file_get_contents("php://input"), true);
 
-// Validate input
-if (!isset($data['username']) || !isset($data['password'])) {
-    http_response_code(400);
-    echo json_encode(['success' => false, 'message' => 'Username and password are required']);
-    exit();
-}
+$username = $input["username"] ?? "";
+$password = $input["password"] ?? "";
 
-$username = trim($data['username']);
-$password = trim($data['password']);
-
-// Validate input is not empty
+// Validate empty fields
 if (empty($username) || empty($password)) {
-    http_response_code(400);
-    echo json_encode(['success' => false, 'message' => 'Username and password cannot be empty']);
+    echo json_encode(["status" => "error", "message" => "Missing username or password"]);
     exit();
 }
 
-// Query to get user with account type
-$query = "SELECT p.person_ID, p.person_username, p.person_password, 
-                 p.account_ID, a.account_name, 
-                 n.name_first, n.name_middle, n.name_last, n.name_suffix
-          FROM person p
-          JOIN account_type a ON p.account_ID = a.account_ID
-          JOIN name n ON p.name_ID = n.name_ID
-          WHERE p.person_username = ?";
+// Use prepared statement (SECURE)
+$sql = "SELECT person_id, person_username, person_password 
+        FROM Person 
+        WHERE person_username = ? LIMIT 1";
 
-$stmt = $conn->prepare($query);
-
-if (!$stmt) {
-    http_response_code(500);
-    echo json_encode(['success' => false, 'message' => 'Database error: ' . $conn->error]);
-    exit();
-}
-
+$stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $username);
 $stmt->execute();
+
 $result = $stmt->get_result();
 
-if ($result->num_rows === 0) {
-    http_response_code(401);
-    echo json_encode(['success' => false, 'message' => 'Invalid username or password']);
-    exit();
+// Check if user exists
+if ($result->num_rows > 0) {
+    $user = $result->fetch_assoc();
+
+    // Check password (plain text version)
+    if ($password === $user["person_password"]) {
+
+        echo json_encode([
+            "status" => "success",
+            "message" => "Login successful",
+            "user" => [
+                "id" => $user["person_id"],
+                "username" => $user["person_username"]
+            ]
+        ]);
+
+    } else {
+        echo json_encode(["status" => "error", "message" => "Incorrect password"]);
+    }
+} else {
+    echo json_encode(["status" => "error", "message" => "User not found"]);
 }
-
-$user = $result->fetch_assoc();
-
-// Verify password (plain text comparison)
-if ($password !== $user['person_password']) {
-    http_response_code(401);
-    echo json_encode(['success' => false, 'message' => 'Invalid username or password']);
-    exit();
-}
-
-// Successful login
-$response = [
-    'success' => true,
-    'message' => 'Login successful',
-    'user' => [
-        'person_ID' => $user['person_ID'],
-        'username' => $user['person_username'],
-        'account_type' => $user['account_name'],
-        'account_ID' => $user['account_ID'],
-        'name' => trim($user['name_first'] . ' ' . ($user['name_middle'] ? $user['name_middle'] . ' ' : '') . $user['name_last'] . ($user['name_suffix'] ? ' ' . $user['name_suffix'] : ''))
-    ]
-];
-
-http_response_code(200);
-echo json_encode($response);
 
 $stmt->close();
 $conn->close();
