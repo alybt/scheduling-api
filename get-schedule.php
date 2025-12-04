@@ -10,8 +10,9 @@ if ($conn->connect_error) {
     die(json_encode(["error" => $conn->connect_error]));
 }
 
+/* --- Get today's day name (Monday, Tuesday, etc.) --- */
 
-$today = date("l");
+$today = date("l"); // Returns full day name
 
 $sql = "
 SELECT 
