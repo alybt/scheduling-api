@@ -40,16 +40,6 @@ CREATE TABLE Person (
     FOREIGN KEY (name_ID) REFERENCES Name(name_ID)
 ) ENGINE=InnoDB;
 
--- ===============================
--- TEACHER
--- (Required because Schedule references Teacher)
--- ===============================
-CREATE TABLE Teacher (
-    teacher_ID INT(11) AUTO_INCREMENT PRIMARY KEY,
-    person_ID INT(11) NOT NULL,
-
-    FOREIGN KEY (person_ID) REFERENCES Person(person_ID)
-) ENGINE=InnoDB;
 
 -- ===============================
 -- ROOM
@@ -100,13 +90,28 @@ CREATE TABLE Schedule (
     time_ID INT(11) NOT NULL,
     room_ID INT(11) NOT NULL,
 
-    schedule_status ENUM('Completed','Suspended','Cancelled','Pending','On-Going') 
+    schedule_status ENUM('Completed','Suspended','Cancelled','Pending','On-Going', 'isDeleted') 
         NOT NULL DEFAULT 'Pending',
 
     FOREIGN KEY (day_ID) REFERENCES Day(day_ID),
     FOREIGN KEY (subject_ID) REFERENCES Subject(subject_ID),
     FOREIGN KEY (section_ID) REFERENCES Section(section_ID),
-    FOREIGN KEY (teacher_ID) REFERENCES Teacher(teacher_ID),
+    FOREIGN KEY (teacher_ID) REFERENCES Person(person_ID),
     FOREIGN KEY (time_ID) REFERENCES Time(time_ID),
     FOREIGN KEY (room_ID) REFERENCES Room(room_ID)
 ) ENGINE=InnoDB;
+
+CREATE TABLE Notification (
+    notif_ID INT AUTO_INCREMENT PRIMARY KEY,
+    person_ID INT NOT NULL,
+    schedule_ID INT NOT NULL,
+    notif_description ENUM('Schedule Created', 'Schedule Updated', 'Schedule Cancelled', 'Schedule Suspended', 'Schedule Completed') NOT NULL,
+    notif_message VARCHAR(255) NOT NULL,
+    notif_status ENUM('Pending', 'Sent', 'Accepted', 'Rejected') NOT NULL DEFAULT 'Pending',
+    is_read TINYINT(1) NOT NULL DEFAULT 0,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (person_ID) REFERENCES Person(person_ID),
+    FOREIGN KEY (schedule_ID) REFERENCES Schedule(schedule_ID)
+) ENGINE=InnoDB;
+
