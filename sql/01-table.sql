@@ -72,33 +72,38 @@ CREATE TABLE Subject (
 -- TIME
 -- ===============================
 CREATE TABLE Time (
-    time_ID INT(11) AUTO_INCREMENT PRIMARY KEY,
-    time_start TIME NOT NULL,
-    time_end TIME NOT NULL
+    time_ID      INT AUTO_INCREMENT PRIMARY KEY,
+    time_slot    TIME NOT NULL UNIQUE,                    -- stores 07:00:00, 07:30:00, etc.
+    display_name VARCHAR(12) AS (TIME_FORMAT(time_slot, '%l:%i %p')) STORED
+        -- Example: 07:00:00 → "7:00 AM", 13:30:00 → "1:30 PM"
 ) ENGINE=InnoDB;
 
 -- ===============================
 -- SCHEDULE
 -- ===============================
 CREATE TABLE Schedule (
-    schedule_ID INT(11) AUTO_INCREMENT PRIMARY KEY,
+    schedule_ID     INT(11) AUTO_INCREMENT PRIMARY KEY,
+    day_ID          INT(11) NOT NULL,
+    subject_ID      INT(11) NOT NULL,
+    section_ID      INT(11) NOT NULL,
+    teacher_ID      INT(11) NOT NULL,
+    
+    time_start_ID   INT(11) NOT NULL,   -- e.g. 07:00-07:30 → time_ID = 1
+    time_end_ID     INT(11) NOT NULL,   -- e.g.08:30-09:00 → time_ID = 6 (class ends at 08:30)
 
-    day_ID INT(11) NOT NULL,
-    subject_ID INT(11) NOT NULL,
-    section_ID INT(11) NOT NULL,
-    teacher_ID INT(11) NOT NULL,
-    time_ID INT(11) NOT NULL,
-    room_ID INT(11) NOT NULL,
+    room_ID         INT(11) NOT NULL,
+    schedule_status ENUM('Completed','Suspended','Cancelled','Pending','On-Going','isDeleted') 
+                    NOT NULL DEFAULT 'Pending',
 
-    schedule_status ENUM('Completed','Suspended','Cancelled','Pending','On-Going', 'isDeleted') 
-        NOT NULL DEFAULT 'Pending',
-
-    FOREIGN KEY (day_ID) REFERENCES Day(day_ID),
+    FOREIGN KEY (day_ID)     REFERENCES Day(day_ID),
     FOREIGN KEY (subject_ID) REFERENCES Subject(subject_ID),
     FOREIGN KEY (section_ID) REFERENCES Section(section_ID),
     FOREIGN KEY (teacher_ID) REFERENCES Person(person_ID),
-    FOREIGN KEY (time_ID) REFERENCES Time(time_ID),
-    FOREIGN KEY (room_ID) REFERENCES Room(room_ID)
+    FOREIGN KEY (time_start_ID) REFERENCES Time(time_ID),
+    FOREIGN KEY (time_end_ID)   REFERENCES Time(time_ID),
+    FOREIGN KEY (room_ID)    REFERENCES Room(room_ID),
+    
+    CHECK (time_start_ID <= time_end_ID)
 ) ENGINE=InnoDB;
 
 CREATE TABLE Notification (

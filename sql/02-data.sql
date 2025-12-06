@@ -1,29 +1,28 @@
-INSERT INTO `time` (`time_ID`, `time_start`, `time_end`) VALUES
-(1, '07:00:00', '07:30:00'),
-(2, '07:30:00', '08:00:00'),
-(3, '08:00:00', '08:30:00'),
-(4, '08:30:00', '09:00:00'),
-(5, '09:00:00', '09:30:00'),
-(6, '09:30:00', '10:00:00'),
-(7, '10:00:00', '10:30:00'),
-(8, '10:30:00', '11:00:00'),
-(9, '11:00:00', '11:30:00'),
-(10, '11:30:00', '12:00:00'),
-(11, '12:00:00', '12:30:00'),
-(12, '12:30:00', '13:00:00'),
-(13, '13:00:00', '13:30:00'),
-(14, '13:30:00', '14:00:00'),
-(15, '14:00:00', '14:30:00'),
-(16, '14:30:00', '15:00:00'),
-(17, '15:00:00', '15:30:00'),
-(18, '15:30:00', '16:00:00'),
-(19, '16:00:00', '16:30:00'),
-(20, '16:30:00', '17:00:00'),
-(21, '17:00:00', '17:30:00'),
-(22, '17:30:00', '18:00:00'),
-(23, '18:00:00', '18:30:00'),
-(24, '18:30:00', '19:00:00');
-
+INSERT INTO Time (time_slot) VALUES
+('07:00:00'),
+('07:30:00'),
+('08:00:00'),
+('08:30:00'),
+('09:00:00'),
+('09:30:00'),
+('10:00:00'),
+('10:30:00'),
+('11:00:00'),
+('11:30:00'),
+('12:00:00'),
+('12:30:00'),
+('13:00:00'),
+('13:30:00'),
+('14:00:00'),
+('14:30:00'),
+('15:00:00'),
+('15:30:00'),
+('16:00:00'),
+('16:30:00'),
+('17:00:00'),
+('17:30:00'),
+('18:00:00'),
+('18:30:00');
 
 -- Insert days
 INSERT INTO `day` (`day_ID`, `day_name`) VALUES
@@ -175,143 +174,51 @@ INSERT INTO `person` (`person_username`, `person_password`, `account_ID`, `name_
 ('timpangco@example.com',   'password123', 2, 26),
 ('zabala@example.com',      'password123', 2, 27);
 
+-- FULL SCHEDULE INSERT (ALL ROOMS) - READY TO RUN
+INSERT INTO Schedule (
+    day_ID,
+    subject_ID,
+    section_ID,
+    teacher_ID,
+    time_start_ID,   -- 07:00 = 1, 07:30 = 2, 08:00 = 3, 08:30 = 4, etc.
+    time_end_ID,     -- class ends at this slot (exclusive)
+    room_ID,
+    schedule_status
+) VALUES
 
--- MONDAY
-INSERT INTO `Schedule` (`day_ID`, `subject_ID`, `section_ID`, `teacher_ID`, `time_ID`, `room_ID`, `schedule_status`)
--- 8:30-10:00 - CC 104, CS 2, FELIX
-SELECT 1, 12, 10, p.person_ID, 4, 1, 'Pending' FROM Person p WHERE p.person_username = 'felix@example.com' UNION ALL
-SELECT 1, 12, 10, p.person_ID, 5, 1, 'Pending' FROM Person p WHERE p.person_username = 'felix@example.com' UNION ALL
-SELECT 1, 12, 10, p.person_ID, 6, 1, 'Pending' FROM Person p WHERE p.person_username = 'felix@example.com' UNION ALL
--- 11:30-1:00 - WD 123, AD 2, BALLAHO
-SELECT 1, 33, 2, p.person_ID, 10, 1, 'Pending' FROM Person p WHERE p.person_username = 'ballaho@example.com' UNION ALL
-SELECT 1, 33, 2, p.person_ID, 11, 1, 'Pending' FROM Person p WHERE p.person_username = 'ballaho@example.com' UNION ALL
-SELECT 1, 33, 2, p.person_ID, 12, 1, 'Pending' FROM Person p WHERE p.person_username = 'ballaho@example.com' UNION ALL
--- 2:30-4:00 - CC 104, IT 2, FELIX
-SELECT 1, 12, 16, p.person_ID, 16, 1, 'Pending' FROM Person p WHERE p.person_username = 'felix@example.com' UNION ALL
-SELECT 1, 12, 16, p.person_ID, 17, 1, 'Pending' FROM Person p WHERE p.person_username = 'felix@example.com' UNION ALL
-SELECT 1, 12, 16, p.person_ID, 18, 1, 'Pending' FROM Person p WHERE p.person_username = 'felix@example.com' UNION ALL
--- 5:30-7:00 - CC 101, IT 1A, BANQUERIGO
-SELECT 1, 10, 14, p.person_ID, 22, 1, 'Pending' FROM Person p WHERE p.person_username = 'banquerigo@example.com' UNION ALL
-SELECT 1, 10, 14, p.person_ID, 23, 1, 'Pending' FROM Person p WHERE p.person_username = 'banquerigo@example.com' UNION ALL
-SELECT 1, 10, 14, p.person_ID, 24, 1, 'Pending' FROM Person p WHERE p.person_username = 'banquerigo@example.com';
+-- MONDAY (day_ID = 1)
+(1, (SELECT subject_ID FROM Subject WHERE subject_code='CC 104'), (SELECT section_ID FROM Section WHERE section_name='CS 2'), (SELECT person_ID FROM Person WHERE person_username='felix@example.com'),        1,  4, 1, 'Occupied'),  -- 7:00–8:30  → Lab 1
+(1, (SELECT subject_ID FROM Subject WHERE subject_code='CC 103'), (SELECT section_ID FROM Section WHERE section_name='AD 2'), (SELECT person_ID FROM Person WHERE person_username='jaafar@example.com'),      4,  7, 1, 'Occupied'),  -- 8:30–10:00 → Lab 1
+(1, (SELECT subject_ID FROM Subject WHERE subject_code='CC 104'), (SELECT section_ID FROM Section WHERE section_name='IT 2'), (SELECT person_ID FROM Person WHERE person_username='felix@example.com'),       10, 13, 1, 'Occupied'), -- 11:30–1:00 → Lab 1
 
----
+-- TUESDAY (day_ID = 2)
+(2, (SELECT subject_ID FROM Subject WHERE subject_code='CC 104'), (SELECT section_ID FROM Section WHERE section_name='AD 2'), (SELECT person_ID FROM Person WHERE person_username='felix@example.com'),        1,  4, 1, 'Occupied'),  -- 7:00–8:30  → Lab 1
+(2, (SELECT subject_ID FROM Subject WHERE subject_code='NC 127'), (SELECT section_ID FROM Section WHERE section_name='AD 2'), (SELECT person_ID FROM Person WHERE person_username='flores@example.com'),       4,  7, 1, 'Occupied'),  -- 8:30–10:00 → Lab 1
+(2, (SELECT subject_ID FROM Subject WHERE subject_code='CC 104'), (SELECT section_ID FROM Section WHERE section_name='NW 2'), (SELECT person_ID FROM Person WHERE person_username='felix@example.com'),       10, 13, 1, 'Occupied'), -- 11:30–1:00 → Lab 1
 
--- TUESDAY
-INSERT INTO `Schedule` (`day_ID`, `subject_ID`, `section_ID`, `teacher_ID`, `time_ID`, `room_ID`, `schedule_status`)
--- 8:30-10:00 - CC 104, AD 2, FELIX
-SELECT 2, 12, 2, p.person_ID, 4, 1, 'Pending' FROM Person p WHERE p.person_username = 'felix@example.com' UNION ALL
-SELECT 2, 12, 2, p.person_ID, 5, 1, 'Pending' FROM Person p WHERE p.person_username = 'felix@example.com' UNION ALL
-SELECT 2, 12, 2, p.person_ID, 6, 1, 'Pending' FROM Person p WHERE p.person_username = 'felix@example.com' UNION ALL
--- 11:30-1:00 - WD 123, CS 2, BALLAHO
-SELECT 2, 33, 10, p.person_ID, 10, 1, 'Pending' FROM Person p WHERE p.person_username = 'ballaho@example.com' UNION ALL
-SELECT 2, 33, 10, p.person_ID, 11, 1, 'Pending' FROM Person p WHERE p.person_username = 'ballaho@example.com' UNION ALL
-SELECT 2, 33, 10, p.person_ID, 12, 1, 'Pending' FROM Person p WHERE p.person_username = 'ballaho@example.com' UNION ALL
--- 2:30-4:00 - CC 104, NW 2, FELIX
-SELECT 2, 12, 25, p.person_ID, 16, 1, 'Pending' FROM Person p WHERE p.person_username = 'felix@example.com' UNION ALL
-SELECT 2, 12, 25, p.person_ID, 17, 1, 'Pending' FROM Person p WHERE p.person_username = 'felix@example.com' UNION ALL
-SELECT 2, 12, 25, p.person_ID, 18, 1, 'Pending' FROM Person p WHERE p.person_username = 'felix@example.com' UNION ALL
--- 5:30-7:00 - CC 101, NW 1B, BANQUERIGO
-SELECT 2, 10, 24, p.person_ID, 22, 1, 'Pending' FROM Person p WHERE p.person_username = 'banquerigo@example.com' UNION ALL
-SELECT 2, 10, 24, p.person_ID, 23, 1, 'Pending' FROM Person p WHERE p.person_username = 'banquerigo@example.com' UNION ALL
-SELECT 2, 10, 24, p.person_ID, 24, 1, 'Pending' FROM Person p WHERE p.person_username = 'banquerigo@example.com';
+-- WEDNESDAY (day_ID = 3)
+(3, (SELECT subject_ID FROM Subject WHERE subject_code='CC 100'), (SELECT section_ID FROM Section WHERE section_name='AD 1A'), (SELECT person_ID FROM Person WHERE person_username='balan@example.com'),     1,  4, 2, 'Occupied'),  -- 7:00–8:30  → Lab 2 (or change room_ID)
+(3, (SELECT subject_ID FROM Subject WHERE subject_code='IT 311'), (SELECT section_ID FROM Section WHERE section_name='IT 3B'), (SELECT person_ID FROM Person WHERE person_username='arip.jp@example.com'), 4,  7, 1, 'Occupied'),  -- 8:30–10:00 → Lab 1
+(3, (SELECT subject_ID FROM Subject WHERE subject_code='CSE 131'), (SELECT section_ID FROM Section WHERE section_name='CS 3C'), (SELECT person_ID FROM Person WHERE person_username='lorenzo.jez@example.com'),10, 13, 2, 'Occupied'), -- 11:30–1:00 → Lab 2
 
----
+-- THURSDAY (day_ID = 4)
+(4, (SELECT subject_ID FROM Subject WHERE subject_code='CC 101'), (SELECT section_ID FROM Section WHERE section_name='IT 1B'), (SELECT person_ID FROM Person WHERE person_username='banquerigo@example.com'),1,  4, 2, 'Occupied'),  -- 7:00–8:30
+(4, (SELECT subject_ID FROM Subject WHERE subject_code='WD 123'), (SELECT section_ID FROM Section WHERE section_name='AD 2'), (SELECT person_ID FROM Person WHERE person_username='ballaho@example.com'),     4,  7, 1, 'Occupied'),  -- 8:30–10:00 → Lab 1
+(4, (SELECT subject_ID FROM Subject WHERE subject_code='IT 211'), (SELECT section_ID FROM Section WHERE section_name='IT 2'),   (SELECT person_ID FROM Person WHERE person_username='ballaho@example.com'),    10, 13, 1, 'Occupied'), -- 11:30–1:00 → Lab 1
+(4, (SELECT subject_ID FROM Subject WHERE subject_code='MAD 121'), (SELECT section_ID FROM Section WHERE section_name='AD 2'), (SELECT person_ID FROM Person WHERE person_username='banquerigo@example.com'),  13, 16, 2, 'Occupied'), -- 1:00–2:30
 
--- WEDNESDAY
-INSERT INTO `Schedule` (`day_ID`, `subject_ID`, `section_ID`, `teacher_ID`, `time_ID`, `room_ID`, `schedule_status`)
--- 7:00-8:30 - CC 100, AD 1A, BALAN
-SELECT 3, 9, 1, p.person_ID, 1, 1, 'Pending' FROM Person p WHERE p.person_username = 'balan@example.com' UNION ALL
-SELECT 3, 9, 1, p.person_ID, 2, 1, 'Pending' FROM Person p WHERE p.person_username = 'balan@example.com' UNION ALL
-SELECT 3, 9, 1, p.person_ID, 3, 1, 'Pending' FROM Person p WHERE p.person_username = 'balan@example.com' UNION ALL
--- 8:30-10:00 - CC 103, AD 2, JAAFAR
-SELECT 3, 11, 2, p.person_ID, 4, 1, 'Pending' FROM Person p WHERE p.person_username = 'jaafar@example.com' UNION ALL
-SELECT 3, 11, 2, p.person_ID, 5, 1, 'Pending' FROM Person p WHERE p.person_username = 'jaafar@example.com' UNION ALL
-SELECT 3, 11, 2, p.person_ID, 6, 1, 'Pending' FROM Person p WHERE p.person_username = 'jaafar@example.com' UNION ALL
--- 11:30-1:00 - CC 101, AD 1A, MARAVILLAS
-SELECT 3, 10, 1, p.person_ID, 10, 1, 'Pending' FROM Person p WHERE p.person_username = 'maravillas@example.com' UNION ALL
-SELECT 3, 10, 1, p.person_ID, 11, 1, 'Pending' FROM Person p WHERE p.person_username = 'maravillas@example.com' UNION ALL
-SELECT 3, 10, 1, p.person_ID, 12, 1, 'Pending' FROM Person p WHERE p.person_username = 'maravillas@example.com' UNION ALL
--- 2:30-4:00 - CC 101, CS 1A, MARAVILLAS
-SELECT 3, 10, 8, p.person_ID, 16, 1, 'Pending' FROM Person p WHERE p.person_username = 'maravillas@example.com' UNION ALL
-SELECT 3, 10, 8, p.person_ID, 17, 1, 'Pending' FROM Person p WHERE p.person_username = 'maravillas@example.com' UNION ALL
-SELECT 3, 10, 8, p.person_ID, 18, 1, 'Pending' FROM Person p WHERE p.person_username = 'maravillas@example.com' UNION ALL
--- 5:30-7:00 - CC 101, NW 1A, BANQUERIGO
-SELECT 3, 10, 23, p.person_ID, 22, 1, 'Pending' FROM Person p WHERE p.person_username = 'banquerigo@example.com' UNION ALL
-SELECT 3, 10, 23, p.person_ID, 23, 1, 'Pending' FROM Person p WHERE p.person_username = 'banquerigo@example.com' UNION ALL
-SELECT 3, 10, 23, p.person_ID, 24, 1, 'Pending' FROM Person p WHERE p.person_username = 'banquerigo@example.com';
+-- FRIDAY (day_ID = 5)
+(5, (SELECT subject_ID FROM Subject WHERE subject_code='NC 127'), (SELECT section_ID FROM Section WHERE section_name='CS 2'), (SELECT person_ID FROM Person WHERE person_username='flores@example.com'),       1,  4, 1, 'Occupied'),  -- 7:00–8:30  → Lab 1
+(5, (SELECT subject_ID FROM Subject WHERE subject_code='WD 123'), (SELECT section_ID FROM Section WHERE section_name='CS 2'), (SELECT person_ID FROM Person WHERE person_username='ballaho@example.com'),         4,  7, 1, 'Occupied'),  -- 8:30–10:00 → Lab 1
+(5, (SELECT subject_ID FROM Subject WHERE subject_code='CC 101'), (SELECT section_ID FROM Section WHERE section_name='AD 1A'), (SELECT person_ID FROM Person WHERE person_username='maravillas@example.com'),10, 13, 3, 'Occupied'), -- 11:30–1:00
+(5, (SELECT subject_ID FROM Subject WHERE subject_code='CC 103'), (SELECT section_ID FROM Section WHERE section_name='NW 2'), (SELECT person_ID FROM Person WHERE person_username='jailani@example.com'),    13, 16, 2, 'Occupied'), -- 1:00–2:30
+(5, (SELECT subject_ID FROM Subject WHERE subject_code='ACT 214'), (SELECT section_ID FROM Section WHERE section_name='NW 2'), (SELECT person_ID FROM Person WHERE person_username='arip.jp@example.com'),  16, 19, 1, 'Occupied'), -- 2:30–4:00 → Lab 1
+(5, (SELECT subject_ID FROM Subject WHERE subject_code='CC 101'), (SELECT section_ID FROM Section WHERE section_name='IT 1A'), (SELECT person_ID FROM Person WHERE person_username='banquerigo@example.com'),16, 19, 4, 'Occupied'), -- 4:00–5:30
+(5, (SELECT subject_ID FROM Subject WHERE subject_code='CC 101'), (SELECT section_ID FROM Section WHERE section_name='NW 1B'), (SELECT person_ID FROM Person WHERE person_username='banquerigo@example.com'),16, 19, 5, 'Occupied'),
+(5, (SELECT subject_ID FROM Subject WHERE subject_code='CC 101'), (SELECT section_ID FROM Section WHERE section_name='NW 1A'), (SELECT person_ID FROM Person WHERE person_username='banquerigo@example.com'),16, 19, 6, 'Occupied'),
+(5, (SELECT subject_ID FROM Subject WHERE subject_code='CC 101'), (SELECT section_ID FROM Section WHERE section_name='AD 1B'), (SELECT person_ID FROM Person WHERE person_username='jailani@example.com'),     16, 19, 7, 'Occupied'),
+(5, (SELECT subject_ID FROM Subject WHERE subject_code='CC 103'), (SELECT section_ID FROM Section WHERE section_name='CS 2'),   (SELECT person_ID FROM Person WHERE person_username='jaafar@example.com'),      16, 19, 2, 'Occupied'),
+(5, (SELECT subject_ID FROM Subject WHERE subject_code='MAD 121'), (SELECT section_ID FROM Section WHERE section_name='CS 2'),   (SELECT person_ID FROM Person WHERE person_username='banquerigo@example.com'),    19, 22, 1, 'Occupied'); -- 5:30–7:00 → Lab 1
 
----
+-- Lab 2
 
--- THURSDAY
-INSERT INTO `Schedule` (`day_ID`, `subject_ID`, `section_ID`, `teacher_ID`, `time_ID`, `room_ID`, `schedule_status`)
--- 8:30-10:00 - CC 101, IT 1B, BANQUERIGO
-SELECT 4, 10, 15, p.person_ID, 4, 1, 'Pending' FROM Person p WHERE p.person_username = 'banquerigo@example.com' UNION ALL
-SELECT 4, 10, 15, p.person_ID, 5, 1, 'Pending' FROM Person p WHERE p.person_username = 'banquerigo@example.com' UNION ALL
-SELECT 4, 10, 15, p.person_ID, 6, 1, 'Pending' FROM Person p WHERE p.person_username = 'banquerigo@example.com' UNION ALL
--- 11:30-1:00 - IT 211, IT 2, BALLAHO
-SELECT 4, 21, 16, p.person_ID, 10, 1, 'Pending' FROM Person p WHERE p.person_username = 'ballaho@example.com' UNION ALL
-SELECT 4, 21, 16, p.person_ID, 11, 1, 'Pending' FROM Person p WHERE p.person_username = 'ballaho@example.com' UNION ALL
-SELECT 4, 21, 16, p.person_ID, 12, 1, 'Pending' FROM Person p WHERE p.person_username = 'ballaho@example.com' UNION ALL
--- 2:30-4:00 - CC 101, CS 1B, MARAVILLAS
-SELECT 4, 10, 9, p.person_ID, 16, 1, 'Pending' FROM Person p WHERE p.person_username = 'maravillas@example.com' UNION ALL
-SELECT 4, 10, 9, p.person_ID, 17, 1, 'Pending' FROM Person p WHERE p.person_username = 'maravillas@example.com' UNION ALL
-SELECT 4, 10, 9, p.person_ID, 18, 1, 'Pending' FROM Person p WHERE p.person_username = 'maravillas@example.com' UNION ALL
--- 5:30-7:00 - CC 101, AD 1B, JAILANI
-SELECT 4, 10, 2, p.person_ID, 22, 1, 'Pending' FROM Person p WHERE p.person_username = 'jailani@example.com' UNION ALL
-SELECT 4, 10, 2, p.person_ID, 23, 1, 'Pending' FROM Person p WHERE p.person_username = 'jailani@example.com' UNION ALL
-SELECT 4, 10, 2, p.person_ID, 24, 1, 'Pending' FROM Person p WHERE p.person_username = 'jailani@example.com';
-
----
-
--- FRIDAY
-INSERT INTO `Schedule` (`day_ID`, `subject_ID`, `section_ID`, `teacher_ID`, `time_ID`, `room_ID`, `schedule_status`)
--- 7:00-8:30 - NC 127, CS 2, FLORES
-SELECT 5, 29, 10, p.person_ID, 1, 1, 'Pending' FROM Person p WHERE p.person_username = 'flores@example.com' UNION ALL
-SELECT 5, 29, 10, p.person_ID, 2, 1, 'Pending' FROM Person p WHERE p.person_username = 'flores@example.com' UNION ALL
-SELECT 5, 29, 10, p.person_ID, 3, 1, 'Pending' FROM Person p WHERE p.person_username = 'flores@example.com' UNION ALL
--- 10:00-11:30 - NC 127, AD 2, FLORES
-SELECT 5, 29, 2, p.person_ID, 7, 1, 'Pending' FROM Person p WHERE p.person_username = 'flores@example.com' UNION ALL
-SELECT 5, 29, 2, p.person_ID, 8, 1, 'Pending' FROM Person p WHERE p.person_username = 'flores@example.com' UNION ALL
-SELECT 5, 29, 2, p.person_ID, 9, 1, 'Pending' FROM Person p WHERE p.person_username = 'flores@example.com' UNION ALL
--- 11:30-1:00 - CSE 131, CS 3C, LORENZO JEZ
-SELECT 5, 15, 13, p.person_ID, 10, 1, 'Pending' FROM Person p WHERE p.person_username = 'lorenzo.jez@example.com' UNION ALL
-SELECT 5, 15, 13, p.person_ID, 11, 1, 'Pending' FROM Person p WHERE p.person_username = 'lorenzo.jez@example.com' UNION ALL
-SELECT 5, 15, 13, p.person_ID, 12, 1, 'Pending' FROM Person p WHERE p.person_username = 'lorenzo.jez@example.com' UNION ALL
--- 2:30-4:00 - CC 103, NW 2, JAILANI
-SELECT 5, 11, 25, p.person_ID, 16, 1, 'Pending' FROM Person p WHERE p.person_username = 'jailani@example.com' UNION ALL
-SELECT 5, 11, 25, p.person_ID, 17, 1, 'Pending' FROM Person p WHERE p.person_username = 'jailani@example.com' UNION ALL
-SELECT 5, 11, 25, p.person_ID, 18, 1, 'Pending' FROM Person p WHERE p.person_username = 'jailani@example.com' UNION ALL
--- 5:30-7:00 - CC 103, CS 2, JAAFAR
-SELECT 5, 11, 10, p.person_ID, 22, 1, 'Pending' FROM Person p WHERE p.person_username = 'jaafar@example.com' UNION ALL
-SELECT 5, 11, 10, p.person_ID, 23, 1, 'Pending' FROM Person p WHERE p.person_username = 'jaafar@example.com' UNION ALL
-SELECT 5, 11, 10, p.person_ID, 24, 1, 'Pending' FROM Person p WHERE p.person_username = 'jaafar@example.com';
-
----
-
--- SATURDAY
-INSERT INTO `Schedule` (`day_ID`, `subject_ID`, `section_ID`, `teacher_ID`, `time_ID`, `room_ID`, `schedule_status`)
--- 7:00-8:30 - IT 311, IT 3A, ARIP JP
-SELECT 6, 24, 17, p.person_ID, 1, 1, 'Pending' FROM Person p WHERE p.person_username = 'arip.jp@example.com' UNION ALL
-SELECT 6, 24, 17, p.person_ID, 2, 1, 'Pending' FROM Person p WHERE p.person_username = 'arip.jp@example.com' UNION ALL
-SELECT 6, 24, 17, p.person_ID, 3, 1, 'Pending' FROM Person p WHERE p.person_username = 'arip.jp@example.com' UNION ALL
--- 10:00-11:30 - IT 311, IT 3B, ARIP JP
-SELECT 6, 24, 18, p.person_ID, 7, 1, 'Pending' FROM Person p WHERE p.person_username = 'arip.jp@example.com' UNION ALL
-SELECT 6, 24, 18, p.person_ID, 8, 1, 'Pending' FROM Person p WHERE p.person_username = 'arip.jp@example.com' UNION ALL
-SELECT 6, 24, 18, p.person_ID, 9, 1, 'Pending' FROM Person p WHERE p.person_username = 'arip.jp@example.com' UNION ALL
--- 11:30-1:00 - MAD 121, AD 2, BANQUERIGO
-SELECT 6, 28, 2, p.person_ID, 10, 1, 'Pending' FROM Person p WHERE p.person_username = 'banquerigo@example.com' UNION ALL
-SELECT 6, 28, 2, p.person_ID, 11, 1, 'Pending' FROM Person p WHERE p.person_username = 'banquerigo@example.com' UNION ALL
-SELECT 6, 28, 2, p.person_ID, 12, 1, 'Pending' FROM Person p WHERE p.person_username = 'banquerigo@example.com' UNION ALL
--- 1:00-2:30 - ACT 214, NW 2, ARIP JP
-SELECT 6, 4, 25, p.person_ID, 13, 1, 'Pending' FROM Person p WHERE p.person_username = 'arip.jp@example.com' UNION ALL
-SELECT 6, 4, 25, p.person_ID, 14, 1, 'Pending' FROM Person p WHERE p.person_username = 'arip.jp@example.com' UNION ALL
-SELECT 6, 4, 25, p.person_ID, 15, 1, 'Pending' FROM Person p WHERE p.person_username = 'arip.jp@example.com' UNION ALL
--- 4:00-5:30 - ACT 215, NW 2, ARIP JP
-SELECT 6, 5, 25, p.person_ID, 19, 1, 'Pending' FROM Person p WHERE p.person_username = 'arip.jp@example.com' UNION ALL
-SELECT 6, 5, 25, p.person_ID, 20, 1, 'Pending' FROM Person p WHERE p.person_username = 'arip.jp@example.com' UNION ALL
-SELECT 6, 5, 25, p.person_ID, 21, 1, 'Pending' FROM Person p WHERE p.person_username = 'arip.jp@example.com' UNION ALL
--- 5:30-7:00 - MAD 121, CS 2, BANQUERIGO
-SELECT 6, 28, 10, p.person_ID, 22, 1, 'Pending' FROM Person p WHERE p.person_username = 'banquerigo@example.com' UNION ALL
-SELECT 6, 28, 10, p.person_ID, 23, 1, 'Pending' FROM Person p WHERE p.person_username = 'banquerigo@example.com' UNION ALL
-SELECT 6, 28, 10, p.person_ID, 24, 1, 'Pending' FROM Person p WHERE p.person_username = 'banquerigo@example.com';
