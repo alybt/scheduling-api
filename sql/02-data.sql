@@ -175,173 +175,143 @@ INSERT INTO `person` (`person_username`, `person_password`, `account_ID`, `name_
 ('timpangco@example.com',   'password123', 2, 26),
 ('zabala@example.com',      'password123', 2, 27);
 
--- ===============================
--- INSERT TEACHERS
--- ===============================
--- First, we need to create Teacher records for each person who teaches
--- Mapping: person_ID is assigned based on the order of INSERT in person table
-INSERT INTO `teacher` (`person_ID`) 
-SELECT person_ID FROM person WHERE person_username = 'abirin@example.com' UNION ALL
-SELECT person_ID FROM person WHERE person_username = 'arip.a@example.com' UNION ALL
-SELECT person_ID FROM person WHERE person_username = 'arip.ja@example.com' UNION ALL
-SELECT person_ID FROM person WHERE person_username = 'arip.jp@example.com' UNION ALL
-SELECT person_ID FROM person WHERE person_username = 'balan@example.com' UNION ALL
-SELECT person_ID FROM person WHERE person_username = 'ballaho@example.com' UNION ALL
-SELECT person_ID FROM person WHERE person_username = 'banquerigo@example.com' UNION ALL
-SELECT person_ID FROM person WHERE person_username = 'belamide@example.com' UNION ALL
-SELECT person_ID FROM person WHERE person_username = 'catadman@example.com' UNION ALL
-SELECT person_ID FROM person WHERE person_username = 'escorial.a@example.com' UNION ALL
-SELECT person_ID FROM person WHERE person_username = 'escorial.j@example.com' UNION ALL
-SELECT person_ID FROM person WHERE person_username = 'felix@example.com' UNION ALL
-SELECT person_ID FROM person WHERE person_username = 'flores@example.com' UNION ALL
-SELECT person_ID FROM person WHERE person_username = 'jaafar@example.com' UNION ALL
-SELECT person_ID FROM person WHERE person_username = 'jailani@example.com' UNION ALL
-SELECT person_ID FROM person WHERE person_username = 'lines@example.com' UNION ALL
-SELECT person_ID FROM person WHERE person_username = 'lorenzo.jez@example.com' UNION ALL
-SELECT person_ID FROM person WHERE person_username = 'lorenzo.jen@example.com' UNION ALL
-SELECT person_ID FROM person WHERE person_username = 'maravillas@example.com' UNION ALL
-SELECT person_ID FROM person WHERE person_username = 'rojas@example.com' UNION ALL
-SELECT person_ID FROM person WHERE person_username = 'saavedra@example.com' UNION ALL
-SELECT person_ID FROM person WHERE person_username = 'tahil@example.com' UNION ALL
-SELECT person_ID FROM person WHERE person_username = 'timpangco@example.com' UNION ALL
-SELECT person_ID FROM person WHERE person_username = 'zabala@example.com';
 
--- ===============================
--- INSERT SCHEDULE ENTRIES
--- ===============================
--- Helper function to get teacher_ID by username
--- Note: Replace room_ID = 1 with actual room assignments
 -- MONDAY
-INSERT INTO `schedule` (`day_ID`, `subject_ID`, `section_ID`, `person_ID`, `time_ID`, `room_ID`, `schedule_status`) 
+INSERT INTO `Schedule` (`day_ID`, `subject_ID`, `section_ID`, `teacher_ID`, `time_ID`, `room_ID`, `schedule_status`)
 -- 8:30-10:00 - CC 104, CS 2, FELIX
-SELECT 1, 12, 10, p.person_ID, 4, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'felix@example.com' UNION ALL
-SELECT 1, 12, 10, p.person_ID, 5, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'felix@example.com' UNION ALL
-SELECT 1, 12, 10, p.person_ID, 6, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'felix@example.com' UNION ALL
+SELECT 1, 12, 10, p.person_ID, 4, 1, 'Pending' FROM Person p WHERE p.person_username = 'felix@example.com' UNION ALL
+SELECT 1, 12, 10, p.person_ID, 5, 1, 'Pending' FROM Person p WHERE p.person_username = 'felix@example.com' UNION ALL
+SELECT 1, 12, 10, p.person_ID, 6, 1, 'Pending' FROM Person p WHERE p.person_username = 'felix@example.com' UNION ALL
 -- 11:30-1:00 - WD 123, AD 2, BALLAHO
-SELECT 1, 33, 2, p.person_ID, 10, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'ballaho@example.com' UNION ALL
-SELECT 1, 33, 2, p.person_ID, 11, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'ballaho@example.com' UNION ALL
-SELECT 1, 33, 2, p.person_ID, 12, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'ballaho@example.com' UNION ALL
+SELECT 1, 33, 2, p.person_ID, 10, 1, 'Pending' FROM Person p WHERE p.person_username = 'ballaho@example.com' UNION ALL
+SELECT 1, 33, 2, p.person_ID, 11, 1, 'Pending' FROM Person p WHERE p.person_username = 'ballaho@example.com' UNION ALL
+SELECT 1, 33, 2, p.person_ID, 12, 1, 'Pending' FROM Person p WHERE p.person_username = 'ballaho@example.com' UNION ALL
 -- 2:30-4:00 - CC 104, IT 2, FELIX
-SELECT 1, 12, 16, p.person_ID, 16, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'felix@example.com' UNION ALL
-SELECT 1, 12, 16, p.person_ID, 17, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'felix@example.com' UNION ALL
-SELECT 1, 12, 16, p.person_ID, 18, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'felix@example.com' UNION ALL
+SELECT 1, 12, 16, p.person_ID, 16, 1, 'Pending' FROM Person p WHERE p.person_username = 'felix@example.com' UNION ALL
+SELECT 1, 12, 16, p.person_ID, 17, 1, 'Pending' FROM Person p WHERE p.person_username = 'felix@example.com' UNION ALL
+SELECT 1, 12, 16, p.person_ID, 18, 1, 'Pending' FROM Person p WHERE p.person_username = 'felix@example.com' UNION ALL
 -- 5:30-7:00 - CC 101, IT 1A, BANQUERIGO
-SELECT 1, 10, 14, p.person_ID, 22, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'banquerigo@example.com' UNION ALL
-SELECT 1, 10, 14, p.person_ID, 23, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'banquerigo@example.com' UNION ALL
-SELECT 1, 10, 14, p.person_ID, 24, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'banquerigo@example.com';
+SELECT 1, 10, 14, p.person_ID, 22, 1, 'Pending' FROM Person p WHERE p.person_username = 'banquerigo@example.com' UNION ALL
+SELECT 1, 10, 14, p.person_ID, 23, 1, 'Pending' FROM Person p WHERE p.person_username = 'banquerigo@example.com' UNION ALL
+SELECT 1, 10, 14, p.person_ID, 24, 1, 'Pending' FROM Person p WHERE p.person_username = 'banquerigo@example.com';
 
+---
 
 -- TUESDAY
-INSERT INTO `schedule` (`day_ID`, `subject_ID`, `section_ID`, `person_ID`, `time_ID`, `room_ID`, `schedule_status`) 
+INSERT INTO `Schedule` (`day_ID`, `subject_ID`, `section_ID`, `teacher_ID`, `time_ID`, `room_ID`, `schedule_status`)
 -- 8:30-10:00 - CC 104, AD 2, FELIX
-SELECT 2, 12, 2, p.person_ID, 4, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'felix@example.com' UNION ALL
-SELECT 2, 12, 2, p.person_ID, 5, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'felix@example.com' UNION ALL
-SELECT 2, 12, 2, p.person_ID, 6, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'felix@example.com' UNION ALL
+SELECT 2, 12, 2, p.person_ID, 4, 1, 'Pending' FROM Person p WHERE p.person_username = 'felix@example.com' UNION ALL
+SELECT 2, 12, 2, p.person_ID, 5, 1, 'Pending' FROM Person p WHERE p.person_username = 'felix@example.com' UNION ALL
+SELECT 2, 12, 2, p.person_ID, 6, 1, 'Pending' FROM Person p WHERE p.person_username = 'felix@example.com' UNION ALL
 -- 11:30-1:00 - WD 123, CS 2, BALLAHO
-SELECT 2, 33, 10, p.person_ID, 10, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'ballaho@example.com' UNION ALL
-SELECT 2, 33, 10, p.person_ID, 11, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'ballaho@example.com' UNION ALL
-SELECT 2, 33, 10, p.person_ID, 12, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'ballaho@example.com' UNION ALL
+SELECT 2, 33, 10, p.person_ID, 10, 1, 'Pending' FROM Person p WHERE p.person_username = 'ballaho@example.com' UNION ALL
+SELECT 2, 33, 10, p.person_ID, 11, 1, 'Pending' FROM Person p WHERE p.person_username = 'ballaho@example.com' UNION ALL
+SELECT 2, 33, 10, p.person_ID, 12, 1, 'Pending' FROM Person p WHERE p.person_username = 'ballaho@example.com' UNION ALL
 -- 2:30-4:00 - CC 104, NW 2, FELIX
-SELECT 2, 12, 25, p.person_ID, 16, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'felix@example.com' UNION ALL
-SELECT 2, 12, 25, p.person_ID, 17, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'felix@example.com' UNION ALL
-SELECT 2, 12, 25, p.person_ID, 18, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'felix@example.com' UNION ALL
+SELECT 2, 12, 25, p.person_ID, 16, 1, 'Pending' FROM Person p WHERE p.person_username = 'felix@example.com' UNION ALL
+SELECT 2, 12, 25, p.person_ID, 17, 1, 'Pending' FROM Person p WHERE p.person_username = 'felix@example.com' UNION ALL
+SELECT 2, 12, 25, p.person_ID, 18, 1, 'Pending' FROM Person p WHERE p.person_username = 'felix@example.com' UNION ALL
 -- 5:30-7:00 - CC 101, NW 1B, BANQUERIGO
-SELECT 2, 10, 24, p.person_ID, 22, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'banquerigo@example.com' UNION ALL
-SELECT 2, 10, 24, p.person_ID, 23, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'banquerigo@example.com' UNION ALL
-SELECT 2, 10, 24, p.person_ID, 24, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'banquerigo@example.com';
+SELECT 2, 10, 24, p.person_ID, 22, 1, 'Pending' FROM Person p WHERE p.person_username = 'banquerigo@example.com' UNION ALL
+SELECT 2, 10, 24, p.person_ID, 23, 1, 'Pending' FROM Person p WHERE p.person_username = 'banquerigo@example.com' UNION ALL
+SELECT 2, 10, 24, p.person_ID, 24, 1, 'Pending' FROM Person p WHERE p.person_username = 'banquerigo@example.com';
 
+---
 
 -- WEDNESDAY
-INSERT INTO `schedule` (`day_ID`, `subject_ID`, `section_ID`, `person_ID`, `time_ID`, `room_ID`, `schedule_status`) 
+INSERT INTO `Schedule` (`day_ID`, `subject_ID`, `section_ID`, `teacher_ID`, `time_ID`, `room_ID`, `schedule_status`)
 -- 7:00-8:30 - CC 100, AD 1A, BALAN
-SELECT 3, 9, 1, p.person_ID, 1, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'balan@example.com' UNION ALL
-SELECT 3, 9, 1, p.person_ID, 2, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'balan@example.com' UNION ALL
-SELECT 3, 9, 1, p.person_ID, 3, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'balan@example.com' UNION ALL
+SELECT 3, 9, 1, p.person_ID, 1, 1, 'Pending' FROM Person p WHERE p.person_username = 'balan@example.com' UNION ALL
+SELECT 3, 9, 1, p.person_ID, 2, 1, 'Pending' FROM Person p WHERE p.person_username = 'balan@example.com' UNION ALL
+SELECT 3, 9, 1, p.person_ID, 3, 1, 'Pending' FROM Person p WHERE p.person_username = 'balan@example.com' UNION ALL
 -- 8:30-10:00 - CC 103, AD 2, JAAFAR
-SELECT 3, 11, 2, p.person_ID, 4, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'jaafar@example.com' UNION ALL
-SELECT 3, 11, 2, p.person_ID, 5, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'jaafar@example.com' UNION ALL
-SELECT 3, 11, 2, p.person_ID, 6, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'jaafar@example.com' UNION ALL
+SELECT 3, 11, 2, p.person_ID, 4, 1, 'Pending' FROM Person p WHERE p.person_username = 'jaafar@example.com' UNION ALL
+SELECT 3, 11, 2, p.person_ID, 5, 1, 'Pending' FROM Person p WHERE p.person_username = 'jaafar@example.com' UNION ALL
+SELECT 3, 11, 2, p.person_ID, 6, 1, 'Pending' FROM Person p WHERE p.person_username = 'jaafar@example.com' UNION ALL
 -- 11:30-1:00 - CC 101, AD 1A, MARAVILLAS
-SELECT 3, 10, 1, p.person_ID, 10, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'maravillas@example.com' UNION ALL
-SELECT 3, 10, 1, p.person_ID, 11, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'maravillas@example.com' UNION ALL
-SELECT 3, 10, 1, p.person_ID, 12, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'maravillas@example.com' UNION ALL
+SELECT 3, 10, 1, p.person_ID, 10, 1, 'Pending' FROM Person p WHERE p.person_username = 'maravillas@example.com' UNION ALL
+SELECT 3, 10, 1, p.person_ID, 11, 1, 'Pending' FROM Person p WHERE p.person_username = 'maravillas@example.com' UNION ALL
+SELECT 3, 10, 1, p.person_ID, 12, 1, 'Pending' FROM Person p WHERE p.person_username = 'maravillas@example.com' UNION ALL
 -- 2:30-4:00 - CC 101, CS 1A, MARAVILLAS
-SELECT 3, 10, 8, p.person_ID, 16, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'maravillas@example.com' UNION ALL
-SELECT 3, 10, 8, p.person_ID, 17, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'maravillas@example.com' UNION ALL
-SELECT 3, 10, 8, p.person_ID, 18, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'maravillas@example.com' UNION ALL
+SELECT 3, 10, 8, p.person_ID, 16, 1, 'Pending' FROM Person p WHERE p.person_username = 'maravillas@example.com' UNION ALL
+SELECT 3, 10, 8, p.person_ID, 17, 1, 'Pending' FROM Person p WHERE p.person_username = 'maravillas@example.com' UNION ALL
+SELECT 3, 10, 8, p.person_ID, 18, 1, 'Pending' FROM Person p WHERE p.person_username = 'maravillas@example.com' UNION ALL
 -- 5:30-7:00 - CC 101, NW 1A, BANQUERIGO
-SELECT 3, 10, 23, p.person_ID, 22, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'banquerigo@example.com' UNION ALL
-SELECT 3, 10, 23, p.person_ID, 23, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'banquerigo@example.com' UNION ALL
-SELECT 3, 10, 23, p.person_ID, 24, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'banquerigo@example.com';
+SELECT 3, 10, 23, p.person_ID, 22, 1, 'Pending' FROM Person p WHERE p.person_username = 'banquerigo@example.com' UNION ALL
+SELECT 3, 10, 23, p.person_ID, 23, 1, 'Pending' FROM Person p WHERE p.person_username = 'banquerigo@example.com' UNION ALL
+SELECT 3, 10, 23, p.person_ID, 24, 1, 'Pending' FROM Person p WHERE p.person_username = 'banquerigo@example.com';
 
+---
 
 -- THURSDAY
-INSERT INTO `schedule` (`day_ID`, `subject_ID`, `section_ID`, `person_ID`, `time_ID`, `room_ID`, `schedule_status`) 
+INSERT INTO `Schedule` (`day_ID`, `subject_ID`, `section_ID`, `teacher_ID`, `time_ID`, `room_ID`, `schedule_status`)
 -- 8:30-10:00 - CC 101, IT 1B, BANQUERIGO
-SELECT 4, 10, 15, p.person_ID, 4, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'banquerigo@example.com' UNION ALL
-SELECT 4, 10, 15, p.person_ID, 5, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'banquerigo@example.com' UNION ALL
-SELECT 4, 10, 15, p.person_ID, 6, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'banquerigo@example.com' UNION ALL
+SELECT 4, 10, 15, p.person_ID, 4, 1, 'Pending' FROM Person p WHERE p.person_username = 'banquerigo@example.com' UNION ALL
+SELECT 4, 10, 15, p.person_ID, 5, 1, 'Pending' FROM Person p WHERE p.person_username = 'banquerigo@example.com' UNION ALL
+SELECT 4, 10, 15, p.person_ID, 6, 1, 'Pending' FROM Person p WHERE p.person_username = 'banquerigo@example.com' UNION ALL
 -- 11:30-1:00 - IT 211, IT 2, BALLAHO
-SELECT 4, 21, 16, p.person_ID, 10, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'ballaho@example.com' UNION ALL
-SELECT 4, 21, 16, p.person_ID, 11, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'ballaho@example.com' UNION ALL
-SELECT 4, 21, 16, p.person_ID, 12, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'ballaho@example.com' UNION ALL
+SELECT 4, 21, 16, p.person_ID, 10, 1, 'Pending' FROM Person p WHERE p.person_username = 'ballaho@example.com' UNION ALL
+SELECT 4, 21, 16, p.person_ID, 11, 1, 'Pending' FROM Person p WHERE p.person_username = 'ballaho@example.com' UNION ALL
+SELECT 4, 21, 16, p.person_ID, 12, 1, 'Pending' FROM Person p WHERE p.person_username = 'ballaho@example.com' UNION ALL
 -- 2:30-4:00 - CC 101, CS 1B, MARAVILLAS
-SELECT 4, 10, 9, p.person_ID, 16, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'maravillas@example.com' UNION ALL
-SELECT 4, 10, 9, p.person_ID, 17, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'maravillas@example.com' UNION ALL
-SELECT 4, 10, 9, p.person_ID, 18, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'maravillas@example.com' UNION ALL
+SELECT 4, 10, 9, p.person_ID, 16, 1, 'Pending' FROM Person p WHERE p.person_username = 'maravillas@example.com' UNION ALL
+SELECT 4, 10, 9, p.person_ID, 17, 1, 'Pending' FROM Person p WHERE p.person_username = 'maravillas@example.com' UNION ALL
+SELECT 4, 10, 9, p.person_ID, 18, 1, 'Pending' FROM Person p WHERE p.person_username = 'maravillas@example.com' UNION ALL
 -- 5:30-7:00 - CC 101, AD 1B, JAILANI
-SELECT 4, 10, 2, p.person_ID, 22, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'jailani@example.com' UNION ALL
-SELECT 4, 10, 2, p.person_ID, 23, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'jailani@example.com' UNION ALL
-SELECT 4, 10, 2, p.person_ID, 24, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'jailani@example.com';
+SELECT 4, 10, 2, p.person_ID, 22, 1, 'Pending' FROM Person p WHERE p.person_username = 'jailani@example.com' UNION ALL
+SELECT 4, 10, 2, p.person_ID, 23, 1, 'Pending' FROM Person p WHERE p.person_username = 'jailani@example.com' UNION ALL
+SELECT 4, 10, 2, p.person_ID, 24, 1, 'Pending' FROM Person p WHERE p.person_username = 'jailani@example.com';
 
+---
 
 -- FRIDAY
-INSERT INTO `schedule` (`day_ID`, `subject_ID`, `section_ID`, `person_ID`, `time_ID`, `room_ID`, `schedule_status`) 
+INSERT INTO `Schedule` (`day_ID`, `subject_ID`, `section_ID`, `teacher_ID`, `time_ID`, `room_ID`, `schedule_status`)
 -- 7:00-8:30 - NC 127, CS 2, FLORES
-SELECT 5, 29, 10, p.person_ID, 1, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'flores@example.com' UNION ALL
-SELECT 5, 29, 10, p.person_ID, 2, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'flores@example.com' UNION ALL
-SELECT 5, 29, 10, p.person_ID, 3, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'flores@example.com' UNION ALL
+SELECT 5, 29, 10, p.person_ID, 1, 1, 'Pending' FROM Person p WHERE p.person_username = 'flores@example.com' UNION ALL
+SELECT 5, 29, 10, p.person_ID, 2, 1, 'Pending' FROM Person p WHERE p.person_username = 'flores@example.com' UNION ALL
+SELECT 5, 29, 10, p.person_ID, 3, 1, 'Pending' FROM Person p WHERE p.person_username = 'flores@example.com' UNION ALL
 -- 10:00-11:30 - NC 127, AD 2, FLORES
-SELECT 5, 29, 2, p.person_ID, 7, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'flores@example.com' UNION ALL
-SELECT 5, 29, 2, p.person_ID, 8, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'flores@example.com' UNION ALL
-SELECT 5, 29, 2, p.person_ID, 9, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'flores@example.com' UNION ALL
+SELECT 5, 29, 2, p.person_ID, 7, 1, 'Pending' FROM Person p WHERE p.person_username = 'flores@example.com' UNION ALL
+SELECT 5, 29, 2, p.person_ID, 8, 1, 'Pending' FROM Person p WHERE p.person_username = 'flores@example.com' UNION ALL
+SELECT 5, 29, 2, p.person_ID, 9, 1, 'Pending' FROM Person p WHERE p.person_username = 'flores@example.com' UNION ALL
 -- 11:30-1:00 - CSE 131, CS 3C, LORENZO JEZ
-SELECT 5, 15, 13, p.person_ID, 10, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'lorenzo.jez@example.com' UNION ALL
-SELECT 5, 15, 13, p.person_ID, 11, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'lorenzo.jez@example.com' UNION ALL
-SELECT 5, 15, 13, p.person_ID, 12, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'lorenzo.jez@example.com' UNION ALL
+SELECT 5, 15, 13, p.person_ID, 10, 1, 'Pending' FROM Person p WHERE p.person_username = 'lorenzo.jez@example.com' UNION ALL
+SELECT 5, 15, 13, p.person_ID, 11, 1, 'Pending' FROM Person p WHERE p.person_username = 'lorenzo.jez@example.com' UNION ALL
+SELECT 5, 15, 13, p.person_ID, 12, 1, 'Pending' FROM Person p WHERE p.person_username = 'lorenzo.jez@example.com' UNION ALL
 -- 2:30-4:00 - CC 103, NW 2, JAILANI
-SELECT 5, 11, 25, p.person_ID, 16, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'jailani@example.com' UNION ALL
-SELECT 5, 11, 25, p.person_ID, 17, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'jailani@example.com' UNION ALL
-SELECT 5, 11, 25, p.person_ID, 18, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'jailani@example.com' UNION ALL
+SELECT 5, 11, 25, p.person_ID, 16, 1, 'Pending' FROM Person p WHERE p.person_username = 'jailani@example.com' UNION ALL
+SELECT 5, 11, 25, p.person_ID, 17, 1, 'Pending' FROM Person p WHERE p.person_username = 'jailani@example.com' UNION ALL
+SELECT 5, 11, 25, p.person_ID, 18, 1, 'Pending' FROM Person p WHERE p.person_username = 'jailani@example.com' UNION ALL
 -- 5:30-7:00 - CC 103, CS 2, JAAFAR
-SELECT 5, 11, 10, p.person_ID, 22, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'jaafar@example.com' UNION ALL
-SELECT 5, 11, 10, p.person_ID, 23, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'jaafar@example.com' UNION ALL
-SELECT 5, 11, 10, p.person_ID, 24, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'jaafar@example.com';
+SELECT 5, 11, 10, p.person_ID, 22, 1, 'Pending' FROM Person p WHERE p.person_username = 'jaafar@example.com' UNION ALL
+SELECT 5, 11, 10, p.person_ID, 23, 1, 'Pending' FROM Person p WHERE p.person_username = 'jaafar@example.com' UNION ALL
+SELECT 5, 11, 10, p.person_ID, 24, 1, 'Pending' FROM Person p WHERE p.person_username = 'jaafar@example.com';
 
+---
 
 -- SATURDAY
-INSERT INTO `schedule` (`day_ID`, `subject_ID`, `section_ID`, `person_ID`, `time_ID`, `room_ID`, `schedule_status`) 
+INSERT INTO `Schedule` (`day_ID`, `subject_ID`, `section_ID`, `teacher_ID`, `time_ID`, `room_ID`, `schedule_status`)
 -- 7:00-8:30 - IT 311, IT 3A, ARIP JP
-SELECT 6, 24, 17, p.person_ID, 1, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'arip.jp@example.com' UNION ALL
-SELECT 6, 24, 17, p.person_ID, 2, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'arip.jp@example.com' UNION ALL
-SELECT 6, 24, 17, p.person_ID, 3, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'arip.jp@example.com' UNION ALL
+SELECT 6, 24, 17, p.person_ID, 1, 1, 'Pending' FROM Person p WHERE p.person_username = 'arip.jp@example.com' UNION ALL
+SELECT 6, 24, 17, p.person_ID, 2, 1, 'Pending' FROM Person p WHERE p.person_username = 'arip.jp@example.com' UNION ALL
+SELECT 6, 24, 17, p.person_ID, 3, 1, 'Pending' FROM Person p WHERE p.person_username = 'arip.jp@example.com' UNION ALL
 -- 10:00-11:30 - IT 311, IT 3B, ARIP JP
-SELECT 6, 24, 18, p.person_ID, 7, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'arip.jp@example.com' UNION ALL
-SELECT 6, 24, 18, p.person_ID, 8, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'arip.jp@example.com' UNION ALL
-SELECT 6, 24, 18, p.person_ID, 9, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'arip.jp@example.com' UNION ALL
+SELECT 6, 24, 18, p.person_ID, 7, 1, 'Pending' FROM Person p WHERE p.person_username = 'arip.jp@example.com' UNION ALL
+SELECT 6, 24, 18, p.person_ID, 8, 1, 'Pending' FROM Person p WHERE p.person_username = 'arip.jp@example.com' UNION ALL
+SELECT 6, 24, 18, p.person_ID, 9, 1, 'Pending' FROM Person p WHERE p.person_username = 'arip.jp@example.com' UNION ALL
 -- 11:30-1:00 - MAD 121, AD 2, BANQUERIGO
-SELECT 6, 28, 2, p.person_ID, 10, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'banquerigo@example.com' UNION ALL
-SELECT 6, 28, 2, p.person_ID, 11, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'banquerigo@example.com' UNION ALL
-SELECT 6, 28, 2, p.person_ID, 12, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'banquerigo@example.com' UNION ALL
+SELECT 6, 28, 2, p.person_ID, 10, 1, 'Pending' FROM Person p WHERE p.person_username = 'banquerigo@example.com' UNION ALL
+SELECT 6, 28, 2, p.person_ID, 11, 1, 'Pending' FROM Person p WHERE p.person_username = 'banquerigo@example.com' UNION ALL
+SELECT 6, 28, 2, p.person_ID, 12, 1, 'Pending' FROM Person p WHERE p.person_username = 'banquerigo@example.com' UNION ALL
 -- 1:00-2:30 - ACT 214, NW 2, ARIP JP
-SELECT 6, 4, 25, p.person_ID, 13, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'arip.jp@example.com' UNION ALL
-SELECT 6, 4, 25, p.person_ID, 14, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'arip.jp@example.com' UNION ALL
-SELECT 6, 4, 25, p.person_ID, 15, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'arip.jp@example.com' UNION ALL
+SELECT 6, 4, 25, p.person_ID, 13, 1, 'Pending' FROM Person p WHERE p.person_username = 'arip.jp@example.com' UNION ALL
+SELECT 6, 4, 25, p.person_ID, 14, 1, 'Pending' FROM Person p WHERE p.person_username = 'arip.jp@example.com' UNION ALL
+SELECT 6, 4, 25, p.person_ID, 15, 1, 'Pending' FROM Person p WHERE p.person_username = 'arip.jp@example.com' UNION ALL
 -- 4:00-5:30 - ACT 215, NW 2, ARIP JP
-SELECT 6, 5, 25, p.person_ID, 19, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'arip.jp@example.com' UNION ALL
-SELECT 6, 5, 25, p.person_ID, 20, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'arip.jp@example.com' UNION ALL
-SELECT 6, 5, 25, p.person_ID, 21, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'arip.jp@example.com' UNION ALL
+SELECT 6, 5, 25, p.person_ID, 19, 1, 'Pending' FROM Person p WHERE p.person_username = 'arip.jp@example.com' UNION ALL
+SELECT 6, 5, 25, p.person_ID, 20, 1, 'Pending' FROM Person p WHERE p.person_username = 'arip.jp@example.com' UNION ALL
+SELECT 6, 5, 25, p.person_ID, 21, 1, 'Pending' FROM Person p WHERE p.person_username = 'arip.jp@example.com' UNION ALL
 -- 5:30-7:00 - MAD 121, CS 2, BANQUERIGO
-SELECT 6, 28, 10, p.person_ID, 22, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'banquerigo@example.com' UNION ALL
-SELECT 6, 28, 10, p.person_ID, 23, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'banquerigo@example.com' UNION ALL
-SELECT 6, 28, 10, p.person_ID, 24, 1, 'Pending' FROM teacher t JOIN person p ON t.person_ID = p.person_ID WHERE p.person_username = 'banquerigo@example.com';
+SELECT 6, 28, 10, p.person_ID, 22, 1, 'Pending' FROM Person p WHERE p.person_username = 'banquerigo@example.com' UNION ALL
+SELECT 6, 28, 10, p.person_ID, 23, 1, 'Pending' FROM Person p WHERE p.person_username = 'banquerigo@example.com' UNION ALL
+SELECT 6, 28, 10, p.person_ID, 24, 1, 'Pending' FROM Person p WHERE p.person_username = 'banquerigo@example.com';
