@@ -205,7 +205,7 @@ INSERT INTO Schedule (
 
 -- THURSDAY (day_ID = 4)
 (4, (SELECT subject_ID FROM Subject WHERE subject_code='CC 101'), (SELECT section_ID FROM Section WHERE section_name='IT 1B'), (SELECT person_ID FROM Person WHERE person_username='banquerigo@example.com'),1,  4, 2, 'Occupied'),  -- 7:00–8:30
-(4, (SELECT subject_ID FROM Subject WHERE subject_code='WD 123'), (SELECT section_ID FROM Section WHERE section_name='AD 2'), (SELECT person_ID FROM Person WHERE person_username='ballaho@example.com'),     4,  7, 1, 'Occupied'),  -- 8:30–10:00 → Lab 1
+(4, (SELECT subject_ID FROM Subject WHERE subject_code='WD 123'), (SELECT section_ID   FROM Section WHERE section_name='AD 2'), (SELECT person_ID FROM Person WHERE person_username='ballaho@example.com'),     4,  7, 1, 'Occupied'),  -- 8:30–10:00 → Lab 1
 (4, (SELECT subject_ID FROM Subject WHERE subject_code='IT 211'), (SELECT section_ID FROM Section WHERE section_name='IT 2'),   (SELECT person_ID FROM Person WHERE person_username='ballaho@example.com'),    10, 13, 1, 'Occupied'), -- 11:30–1:00 → Lab 1
 (4, (SELECT subject_ID FROM Subject WHERE subject_code='MAD 121'), (SELECT section_ID FROM Section WHERE section_name='AD 2'), (SELECT person_ID FROM Person WHERE person_username='banquerigo@example.com'),  13, 16, 2, 'Occupied'), -- 1:00–2:30
 
@@ -223,4 +223,237 @@ INSERT INTO Schedule (
 (5, (SELECT subject_ID FROM Subject WHERE subject_code='MAD 121'), (SELECT section_ID FROM Section WHERE section_name='CS 2'),   (SELECT person_ID FROM Person WHERE person_username='banquerigo@example.com'),    19, 22, 1, 'Occupied'); -- 5:30–7:00 → Lab 1
 
 -- Lab 2
+-- MONDAY (day_ID = 1)
+(1, (SELECT subject_ID FROM Subject WHERE subject_code='CC 100'), (SELECT section_ID FROM Section WHERE section_name='NW 1A'), (SELECT person_ID FROM Person WHERE person_username='abirin@example.com'), 1, 4, 2, 'Occupied'),  -- 7:00–8:30 → Lab 2
+(1, (SELECT subject_ID FROM Subject WHERE subject_code='CC 100'), (SELECT section_ID FROM Section WHERE section_name='NW 1B'), (SELECT person_ID FROM Person WHERE person_username='abirin@example.com'), 10, 13, 2, 'Occupied'), -- 10:00–11:30 → Lab 2
+(1, (SELECT subject_ID FROM Subject WHERE subject_code='IT 314'), (SELECT section_ID FROM Section WHERE section_name='IT 3A'), (SELECT person_ID FROM Person WHERE person_username='escorial.j@example.com'), 13, 16, 2, 'Occupied'), -- 1:00–2:30 → Lab 2
+(1, (SELECT subject_ID FROM Subject WHERE subject_code='ADS 133'), (SELECT section_ID FROM Section WHERE section_name='CS 3B'), (SELECT person_ID FROM Person WHERE person_username='catadman@example.com'), 16, 19, 2, 'Occupied'), -- 2:30–4:00 → Lab 2
+(1, (SELECT subject_ID FROM Subject WHERE subject_code='CC 105'), (SELECT section_ID FROM Section WHERE section_name='IT 3B'), (SELECT person_ID FROM Person WHERE person_username='saavedra@example.com'), 19, 22, 2, 'Occupied'), -- 5:30–7:00 → Lab 2
 
+-- TUESDAY (day_ID = 2)
+(2, (SELECT subject_ID FROM Subject WHERE subject_code='CC 100'), (SELECT section_ID FROM Section WHERE section_name='CS 1B'), (SELECT person_ID FROM Person WHERE person_username='abirin@example.com'), 1, 4, 2, 'Occupied'),  -- 7:00–8:30 → Lab 2
+(2, (SELECT subject_ID FROM Subject WHERE subject_code='CC 100'), (SELECT section_ID FROM Section WHERE section_name='CS 1A'), (SELECT person_ID FROM Person WHERE person_username='jailani@example.com'), 10, 13, 2, 'Occupied'), -- 10:00–11:30 → Lab 2
+(2, (SELECT subject_ID FROM Subject WHERE subject_code='CSE 131'), (SELECT section_ID FROM Section WHERE section_name='CS 3A'), (SELECT person_ID FROM Person WHERE person_username='lorenzo.jez@example.com'), 13, 16, 2, 'Occupied'), -- 1:00–2:30 → Lab 2
+(2, (SELECT subject_ID FROM Subject WHERE subject_code='CSE 131'), (SELECT section_ID FROM Section WHERE section_name='CS 3B'), (SELECT person_ID FROM Person WHERE person_username='lorenzo.jez@example.com'), 16, 19, 2, 'Occupied'), -- 2:30–4:00 → Lab 2
+(2, (SELECT subject_ID FROM Subject WHERE subject_code='IT 311'), (SELECT section_ID FROM Section WHERE section_name='IT 3C'), (SELECT person_ID FROM Person WHERE person_username='arip.jp@example.com'), 19, 22, 2, 'Occupied'), -- 5:30–7:00 → Lab 2
+
+-- WEDNESDAY (day_ID = 3)
+(3, (SELECT subject_ID FROM Subject WHERE subject_code='CC 100'), (SELECT section_ID FROM Section WHERE section_name='IT 1B'), (SELECT person_ID FROM Person WHERE person_username='abirin@example.com'), 1, 4, 2, 'Occupied'),  -- 7:00–8:30 → Lab 2
+(3, (SELECT subject_ID FROM Subject WHERE subject_code='CC 100'), (SELECT section_ID FROM Section WHERE section_name='AD 1B'), (SELECT person_ID FROM Person WHERE person_username='abirin@example.com'), 10, 13, 2, 'Occupied'), -- 10:00–11:30 → Lab 2
+(3, (SELECT subject_ID FROM Subject WHERE subject_code='IT 314'), (SELECT section_ID FROM Section WHERE section_name='IT 3B'), (SELECT person_ID FROM Person WHERE person_username='escorial.j@example.com'), 13, 16, 2, 'Occupied'), -- 1:00–2:30 → Lab 2
+(3, (SELECT subject_ID FROM Subject WHERE subject_code='ADS 133'), (SELECT section_ID FROM Section WHERE section_name='CS 3C'), (SELECT person_ID FROM Person WHERE person_username='catadman@example.com'), 16, 19, 2, 'Occupied'), -- 2:30–4:00 → Lab 2
+(3, (SELECT subject_ID FROM Subject WHERE subject_code='CC 105'), (SELECT section_ID FROM Section WHERE section_name='IT 3C'), (SELECT person_ID FROM Person WHERE person_username='saavedra@example.com'), 19, 22, 2, 'Occupied'), -- 5:30–7:00 → Lab 2
+
+-- THURSDAY (day_ID = 4)
+(4, (SELECT subject_ID FROM Subject WHERE subject_code='CC 100'), (SELECT section_ID FROM Section WHERE section_name='AD 1A'), (SELECT person_ID FROM Person WHERE person_username='balan@example.com'), 1, 4, 2, 'Occupied'),  -- 7:00–8:30 → Lab 2
+(4, (SELECT subject_ID FROM Subject WHERE subject_code='CC 103'), (SELECT section_ID FROM Section WHERE section_name='AD 2'), (SELECT person_ID FROM Person WHERE person_username='jaafar@example.com'), 4, 7, 2, 'Occupied'),  -- 8:30–10:00 → Lab 2
+(4, (SELECT subject_ID FROM Subject WHERE subject_code='IT 145'), (SELECT section_ID FROM Section WHERE section_name='IT 4A'), (SELECT person_ID FROM Person WHERE person_username='zabala@example.com'), 10, 13, 2, 'Occupied'), -- 10:00–11:30 → Lab 2
+(4, (SELECT subject_ID FROM Subject WHERE subject_code='IT 314'), (SELECT section_ID FROM Section WHERE section_name='IT 3C'), (SELECT person_ID FROM Person WHERE person_username='escorial.j@example.com'), 13, 16, 2, 'Occupied'), -- 1:00–2:30 → Lab 2
+(4, (SELECT subject_ID FROM Subject WHERE subject_code='ADS 133'), (SELECT section_ID FROM Section WHERE section_name='CS 3A'), (SELECT person_ID FROM Person WHERE person_username='catadman@example.com'), 16, 19, 2, 'Occupied'), -- 2:30–4:00 → Lab 2
+(4, (SELECT subject_ID FROM Subject WHERE subject_code='CC 105'), (SELECT section_ID FROM Section WHERE section_name='IT 3A'), (SELECT person_ID FROM Person WHERE person_username='saavedra@example.com'), 19, 22, 2, 'Occupied'), -- 5:30–7:00 → Lab 2
+
+-- FRIDAY (day_ID = 5)
+(5, (SELECT subject_ID FROM Subject WHERE subject_code='CC 103'), (SELECT section_ID FROM Section WHERE section_name='IT 2'), (SELECT person_ID FROM Person WHERE person_username='jailani@example.com'), 1, 4, 2, 'Occupied'),  -- 7:00–8:30 → Lab 2
+(5, (SELECT subject_ID FROM Subject WHERE subject_code='IT 145'), (SELECT section_ID FROM Section WHERE section_name='IT 4B'), (SELECT person_ID FROM Person WHERE person_username='balan@example.com'), 10, 13, 2, 'Occupied'), -- 10:00–11:30 → Lab 2
+(5, (SELECT subject_ID FROM Subject WHERE subject_code='IT 145'), (SELECT section_ID FROM Section WHERE section_name='IT 4C'), (SELECT person_ID FROM Person WHERE person_username='zabala@example.com'), 13, 16, 2, 'Occupied'), -- 1:00–2:30 → Lab 2
+(5, (SELECT subject_ID FROM Subject WHERE subject_code='CC 100'), (SELECT section_ID FROM Section WHERE section_name='IT 1A'), (SELECT person_ID FROM Person WHERE person_username='balan@example.com'), 16, 19, 2, 'Occupied'), -- 4:00–5:30 → Lab 2
+
+-- SATURDAY (day_ID = 6)
+(6, (SELECT subject_ID FROM Subject WHERE subject_code='ACT 115'), (SELECT section_ID FROM Section WHERE section_name='NW 1B'), (SELECT person_ID FROM Person WHERE person_username='balan@example.com'), 1, 4, 2, 'Occupied'),  -- 7:00–8:30 → Lab 2
+(6, (SELECT subject_ID FROM Subject WHERE subject_code='IT 143'), (SELECT section_ID FROM Section WHERE section_name='IT 4A'), (SELECT person_ID FROM Person WHERE person_username='lorenzo.jen@example.com'), 4, 7, 2, 'Occupied'),  -- 8:30–10:00 → Lab 2
+(6, (SELECT subject_ID FROM Subject WHERE subject_code='IT 143'), (SELECT section_ID FROM Section WHERE section_name='IT 4B'), (SELECT person_ID FROM Person WHERE person_username='lorenzo.jen@example.com'), 10, 13, 2, 'Occupied'), -- 10:00–11:30 → Lab 2
+(6, (SELECT subject_ID FROM Subject WHERE subject_code='ACT 115'), (SELECT section_ID FROM Section WHERE section_name='NW 1A'), (SELECT person_ID FROM Person WHERE person_username='balan@example.com'), 13, 16, 2, 'Occupied'), -- 1:00–2:30 → Lab 2
+(6, (SELECT subject_ID FROM Subject WHERE subject_code='IT 143'), (SELECT section_ID FROM Section WHERE section_name='IT 4C'), (SELECT person_ID FROM Person WHERE person_username='lorenzo.jen@example.com'), 16, 19, 2, 'Occupied'); -- 2:30–4:00 → Lab 2
+
+--LR 1
+-- MONDAY (day_ID = 1)
+(1, (SELECT subject_ID FROM Subject WHERE subject_code='ADS 133'), (SELECT section_ID FROM Section WHERE section_name='CS 3B'), (SELECT person_ID FROM Person WHERE person_username='catadman@example.com'), 10, 13, 3, 'Occupied'), -- 11:30–1:00 → LR 1
+(1, (SELECT subject_ID FROM Subject WHERE subject_code='OS 137'), (SELECT section_ID FROM Section WHERE section_name='CS 3C'), (SELECT person_ID FROM Person WHERE person_username='arip.e@example.com'), 16, 19, 3, 'Occupied'), -- 2:30–4:00 → LR 1
+(1, (SELECT subject_ID FROM Subject WHERE subject_code='CC 101'), (SELECT section_ID FROM Section WHERE section_name='NW 1A'), (SELECT person_ID FROM Person WHERE person_username='rojas@example.com'), 19, 22, 3, 'Occupied'), -- 4:00–5:30 → LR 1
+
+-- TUESDAY (day_ID = 2)
+(2, (SELECT subject_ID FROM Subject WHERE subject_code='ATFL 135'), (SELECT section_ID FROM Section WHERE section_name='CS 3A'), (SELECT person_ID FROM Person WHERE person_username='maravillas@example.com'), 4, 7, 3, 'Occupied'), -- 8:30–10:00 → LR 1
+(2, (SELECT subject_ID FROM Subject WHERE subject_code='ATFL 135'), (SELECT section_ID FROM Section WHERE section_name='CS 3B'), (SELECT person_ID FROM Person WHERE person_username='maravillas@example.com'), 7, 10, 3, 'Occupied'), -- 10:00–11:30 → LR 1
+(2, (SELECT subject_ID FROM Subject WHERE subject_code='SIPP 125'), (SELECT section_ID FROM Section WHERE section_name='AD 2'), (SELECT person_ID FROM Person WHERE person_username='lines@example.com'), 10, 13, 3, 'Occupied'), -- 11:30–1:00 → LR 1
+(2, (SELECT subject_ID FROM Subject WHERE subject_code='ATFL 135'), (SELECT section_ID FROM Section WHERE section_name='CS 3C'), (SELECT person_ID FROM Person WHERE person_username='maravillas@example.com'), 13, 16, 3, 'Occupied'), -- 1:00–2:30 → LR 1
+(2, (SELECT subject_ID FROM Subject WHERE subject_code='IT 211'), (SELECT section_ID FROM Section WHERE section_name='IT 2'), (SELECT person_ID FROM Person WHERE person_username='ballaho@example.com'), 16, 19, 3, 'Occupied'), -- 4:00–5:30 → LR 1
+
+-- WEDNESDAY (day_ID = 3)
+(3, (SELECT subject_ID FROM Subject WHERE subject_code='IT 312'), (SELECT section_ID FROM Section WHERE section_name='IT 3C'), (SELECT person_ID FROM Person WHERE person_username='arip.jp@example.com'), 4, 7, 3, 'Occupied'), -- 8:30–10:00 → LR 1
+(3, (SELECT subject_ID FROM Subject WHERE subject_code='ADS 133'), (SELECT section_ID FROM Section WHERE section_name='CS 3C'), (SELECT person_ID FROM Person WHERE person_username='catadman@example.com'), 10, 13, 3, 'Occupied'), -- 11:30–1:00 → LR 1
+(3, (SELECT subject_ID FROM Subject WHERE subject_code='OS 137'), (SELECT section_ID FROM Section WHERE section_name='CS 3A'), (SELECT person_ID FROM Person WHERE person_username='arip.e@example.com'), 16, 19, 3, 'Occupied'), -- 2:30–4:00 → LR 1
+(3, (SELECT subject_ID FROM Subject WHERE subject_code='IT 143'), (SELECT section_ID FROM Section WHERE section_name='IT 4A'), (SELECT person_ID FROM Person WHERE person_username='lorenzo.jen@example.com'), 19, 22, 3, 'Occupied'), -- 5:30–7:00 → LR 1
+
+-- THURSDAY (day_ID = 4)
+(4, (SELECT subject_ID FROM Subject WHERE subject_code='ADS 133'), (SELECT section_ID FROM Section WHERE section_name='CS 3A'), (SELECT person_ID FROM Person WHERE person_username='catadman@example.com'), 10, 13, 3, 'Occupied'), -- 11:30–1:00 → LR 1
+(4, (SELECT subject_ID FROM Subject WHERE subject_code='OS 137'), (SELECT section_ID FROM Section WHERE section_name='CS 3B'), (SELECT person_ID FROM Person WHERE person_username='arip.e@example.com'), 16, 19, 3, 'Occupied'), -- 2:30–4:00 → LR 1
+(4, (SELECT subject_ID FROM Subject WHERE subject_code='CC 101'), (SELECT section_ID FROM Section WHERE section_name='NW 1A'), (SELECT person_ID FROM Person WHERE person_username='rojas@example.com'), 19, 22, 3, 'Occupied'), -- 4:00–5:30 → LR 1
+
+-- FRIDAY (day_ID = 5)
+(5, (SELECT subject_ID FROM Subject WHERE subject_code='ATFL 135'), (SELECT section_ID FROM Section WHERE section_name='CS 3A'), (SELECT person_ID FROM Person WHERE person_username='maravillas@example.com'), 4, 7, 3, 'Occupied'), -- 8:30–10:00 → LR 1
+(5, (SELECT subject_ID FROM Subject WHERE subject_code='ATFL 135'), (SELECT section_ID FROM Section WHERE section_name='CS 3B'), (SELECT person_ID FROM Person WHERE person_username='maravillas@example.com'), 7, 10, 3, 'Occupied'), -- 10:00–11:30 → LR 1
+(5, (SELECT subject_ID FROM Subject WHERE subject_code='SIPP 125'), (SELECT section_ID FROM Section WHERE section_name='AD 2'), (SELECT person_ID FROM Person WHERE person_username='lines@example.com'), 10, 13, 3, 'Occupied'), -- 11:30–1:00 → LR 1
+(5, (SELECT subject_ID FROM Subject WHERE subject_code='ATFL 135'), (SELECT section_ID FROM Section WHERE section_name='CS 3C'), (SELECT person_ID FROM Person WHERE person_username='maravillas@example.com'), 13, 16, 3, 'Occupied'), -- 1:00–2:30 → LR 1
+(5, (SELECT subject_ID FROM Subject WHERE subject_code='CC 101'), (SELECT section_ID FROM Section WHERE section_name='IT 1B'), (SELECT person_ID FROM Person WHERE person_username='rojas@example.com'), 19, 22, 3, 'Occupied'), -- 4:00–5:30 → LR 1
+
+-- SATURDAY (day_ID = 6)
+(6, (SELECT subject_ID FROM Subject WHERE subject_code='SE 131'), (SELECT section_ID FROM Section WHERE section_name='CS 3A'), (SELECT person_ID FROM Person WHERE person_username='jaafar@example.com'), 1, 4, 3, 'Occupied'), -- 7:00–8:30 → LR 1
+(6, (SELECT subject_ID FROM Subject WHERE subject_code='SE 131'), (SELECT section_ID FROM Section WHERE section_name='CS 3B'), (SELECT person_ID FROM Person WHERE person_username='jaafar@example.com'), 7, 10, 3, 'Occupied'), -- 10:00–11:30 → LR 1
+(6, (SELECT subject_ID FROM Subject WHERE subject_code='SE 131'), (SELECT section_ID FROM Section WHERE section_name='CS 3C'), (SELECT person_ID FROM Person WHERE person_username='jaafar@example.com'), 13, 16, 3, 'Occupied'), -- 1:00–2:30 → LR 1
+(6, (SELECT subject_ID FROM Subject WHERE subject_code='CC 104'), (SELECT section_ID FROM Section WHERE section_name='AD 2'), (SELECT person_ID FROM Person WHERE person_username='jaafar@example.com'), 19, 22, 3, 'Occupied'); -- 4:00–5:30 → LR 1
+
+-- LR 2
+-- MONDAY (day_ID = 1)
+(1, (SELECT subject_ID FROM Subject WHERE subject_code='NC 127'), (SELECT section_ID FROM Section WHERE section_name='AD 2'), (SELECT person_ID FROM Person WHERE person_username='banquerigo@example.com'), 4, 7, 4, 'Occupied'), -- 8:30–10:00 → LR 2
+(1, (SELECT subject_ID FROM Subject WHERE subject_code='NC 127'), (SELECT section_ID FROM Section WHERE section_name='CS 2'), (SELECT person_ID FROM Person WHERE person_username='flores@example.com'), 10, 13, 4, 'Occupied'), -- 11:30–1:00 → LR 2
+(1, (SELECT subject_ID FROM Subject WHERE subject_code='CSE 133'), (SELECT section_ID FROM Section WHERE section_name='CS 3A'), (SELECT person_ID FROM Person WHERE person_username='tahil@example.com'), 13, 16, 4, 'Occupied'), -- 1:00–2:30 → LR 2
+(1, (SELECT subject_ID FROM Subject WHERE subject_code='WD 123'), (SELECT section_ID FROM Section WHERE section_name='AD 2'), (SELECT person_ID FROM Person WHERE person_username='ballaho@example.com'), 16, 19, 4, 'Occupied'), -- 4:00–5:30 → LR 2
+(1, (SELECT subject_ID FROM Subject WHERE subject_code='IT 145'), (SELECT section_ID FROM Section WHERE section_name='IT 4B'), (SELECT person_ID FROM Person WHERE person_username='balan@example.com'), 19, 22, 4, 'Occupied'), -- 5:30–7:00 → LR 2
+
+-- TUESDAY (day_ID = 2)
+(2, (SELECT subject_ID FROM Subject WHERE subject_code='DS 111'), (SELECT section_ID FROM Section WHERE section_name='CS 1A'), (SELECT person_ID FROM Person WHERE person_username='lines@example.com'), 4, 7, 4, 'Occupied'), -- 8:30–10:00 → LR 2
+(2, (SELECT subject_ID FROM Subject WHERE subject_code='CALC 139'), (SELECT section_ID FROM Section WHERE section_name='CS 3A'), (SELECT person_ID FROM Person WHERE person_username='belamide@example.com'), 7, 10, 4, 'Occupied'), -- 10:00–11:30 → LR 2
+(2, (SELECT subject_ID FROM Subject WHERE subject_code='CC 101'), (SELECT section_ID FROM Section WHERE section_name='NW 1B'), (SELECT person_ID FROM Person WHERE person_username='rojas@example.com'), 10, 13, 4, 'Occupied'), -- 11:30–1:00 → LR 2
+(2, (SELECT subject_ID FROM Subject WHERE subject_code='CALC 139'), (SELECT section_ID FROM Section WHERE section_name='CS 3B'), (SELECT person_ID FROM Person WHERE person_username='belamide@example.com'), 13, 16, 4, 'Occupied'), -- 1:00–2:30 → LR 2
+(2, (SELECT subject_ID FROM Subject WHERE subject_code='CALC 139'), (SELECT section_ID FROM Section WHERE section_name='CS 3C'), (SELECT person_ID FROM Person WHERE person_username='belamide@example.com'), 16, 19, 4, 'Occupied'), -- 2:30–4:00 → LR 2
+(2, (SELECT subject_ID FROM Subject WHERE subject_code='ACT 213'), (SELECT section_ID FROM Section WHERE section_name='NW 2'), (SELECT person_ID FROM Person WHERE person_username='arip.ja@example.com'), 19, 22, 4, 'Occupied'), -- 4:00–5:30 → LR 2
+(2, (SELECT subject_ID FROM Subject WHERE subject_code='CDI 108'), (SELECT section_ID FROM Section WHERE section_name='CRIM 4D'), (SELECT person_ID FROM Person WHERE person_username='timpangco@example.com'), 22, 25, 4, 'Occupied'), -- 5:30–7:00 → LR 2
+
+-- WEDNESDAY (day_ID = 3)
+(3, (SELECT subject_ID FROM Subject WHERE subject_code='CC 100'), (SELECT section_ID FROM Section WHERE section_name='CS 1A'), (SELECT person_ID FROM Person WHERE person_username='belamide@example.com'), 7, 10, 4, 'Occupied'), -- 10:00–11:30 → LR 2
+(3, (SELECT subject_ID FROM Subject WHERE subject_code='IT 312'), (SELECT section_ID FROM Section WHERE section_name='IT 3B'), (SELECT person_ID FROM Person WHERE person_username='arip.jp@example.com'), 10, 13, 4, 'Occupied'), -- 11:30–1:00 → LR 2
+(3, (SELECT subject_ID FROM Subject WHERE subject_code='CC 100'), (SELECT section_ID FROM Section WHERE section_name='AD 1A'), (SELECT person_ID FROM Person WHERE person_username='belamide@example.com'), 13, 16, 4, 'Occupied'), -- 1:00–2:30 → LR 2
+(3, (SELECT subject_ID FROM Subject WHERE subject_code='CC 100'), (SELECT section_ID FROM Section WHERE section_name='CS 1B'), (SELECT person_ID FROM Person WHERE person_username='belamide@example.com'), 16, 19, 4, 'Occupied'), -- 4:00–5:30 → LR 2
+(3, (SELECT subject_ID FROM Subject WHERE subject_code='CDI 108'), (SELECT section_ID FROM Section WHERE section_name='CRIM 4C'), (SELECT person_ID FROM Person WHERE person_username='timpangco@example.com'), 19, 22, 4, 'Occupied'), -- 5:30–7:00 → LR 2
+
+-- THURSDAY (day_ID = 4)
+(4, (SELECT subject_ID FROM Subject WHERE subject_code='ACT 214'), (SELECT section_ID FROM Section WHERE section_name='NW 2'), (SELECT person_ID FROM Person WHERE person_username='arip.ja@example.com'), 1, 4, 4, 'Occupied'), -- 7:00–8:30 → LR 2
+(4, (SELECT subject_ID FROM Subject WHERE subject_code='CSE 133'), (SELECT section_ID FROM Section WHERE section_name='CS 3B'), (SELECT person_ID FROM Person WHERE person_username='tahil@example.com'), 7, 10, 4, 'Occupied'), -- 10:00–11:30 → LR 2
+(4, (SELECT subject_ID FROM Subject WHERE subject_code='CC 104'), (SELECT section_ID FROM Section WHERE section_name='CS 2'), (SELECT person_ID FROM Person WHERE person_username='jaafar@example.com'), 10, 13, 4, 'Occupied'), -- 11:30–1:00 → LR 2
+(4, (SELECT subject_ID FROM Subject WHERE subject_code='CSE 133'), (SELECT section_ID FROM Section WHERE section_name='CS 3C'), (SELECT person_ID FROM Person WHERE person_username='tahil@example.com'), 13, 16, 4, 'Occupied'), -- 1:00–2:30 → LR 2
+(4, (SELECT subject_ID FROM Subject WHERE subject_code='WD 123'), (SELECT section_ID FROM Section WHERE section_name='CS 2'), (SELECT person_ID FROM Person WHERE person_username='ballaho@example.com'), 16, 19, 4, 'Occupied'), -- 4:00–5:30 → LR 2
+(4, (SELECT subject_ID FROM Subject WHERE subject_code='IT 312'), (SELECT section_ID FROM Section WHERE section_name='IT 3C'), (SELECT person_ID FROM Person WHERE person_username='arip.jp@example.com'), 19, 22, 4, 'Occupied'), -- 5:30–7:00 → LR 2
+
+-- FRIDAY (day_ID = 5)
+(5, (SELECT subject_ID FROM Subject WHERE subject_code='ACT 214'), (SELECT section_ID FROM Section WHERE section_name='NW 2'), (SELECT person_ID FROM Person WHERE person_username='arip.ja@example.com'), 1, 4, 4, 'Occupied'), -- 7:00–8:30 → LR 2
+(5, (SELECT subject_ID FROM Subject WHERE subject_code='DS 111'), (SELECT section_ID FROM Section WHERE section_name='CS 1A'), (SELECT person_ID FROM Person WHERE person_username='lines@example.com'), 4, 7, 4, 'Occupied'), -- 8:30–10:00 → LR 2
+(5, (SELECT subject_ID FROM Subject WHERE subject_code='CALC 139'), (SELECT section_ID FROM Section WHERE section_name='CS 3A'), (SELECT person_ID FROM Person WHERE person_username='belamide@example.com'), 7, 10, 4, 'Occupied'), -- 10:00–11:30 → LR 2
+(5, (SELECT subject_ID FROM Subject WHERE subject_code='CC 101'), (SELECT section_ID FROM Section WHERE section_name='NW 1B'), (SELECT person_ID FROM Person WHERE person_username='rojas@example.com'), 10, 13, 4, 'Occupied'), -- 11:30–1:00 → LR 2
+(5, (SELECT subject_ID FROM Subject WHERE subject_code='CALC 139'), (SELECT section_ID FROM Section WHERE section_name='CS 3B'), (SELECT person_ID FROM Person WHERE person_username='belamide@example.com'), 13, 16, 4, 'Occupied'), -- 1:00–2:30 → LR 2
+(5, (SELECT subject_ID FROM Subject WHERE subject_code='CALC 139'), (SELECT section_ID FROM Section WHERE section_name='CS 3C'), (SELECT person_ID FROM Person WHERE person_username='belamide@example.com'), 16, 19, 4, 'Occupied'), -- 2:30–4:00 → LR 2
+(5, (SELECT subject_ID FROM Subject WHERE subject_code='ACT 213'), (SELECT section_ID FROM Section WHERE section_name='NW 2'), (SELECT person_ID FROM Person WHERE person_username='arip.ja@example.com'), 19, 22, 4, 'Occupied'), -- 4:00–5:30 → LR 2
+(5, (SELECT subject_ID FROM Subject WHERE subject_code='CDI 108'), (SELECT section_ID FROM Section WHERE section_name='CRIM 4D'), (SELECT person_ID FROM Person WHERE person_username='timpangco@example.com'), 22, 25, 4, 'Occupied'), -- 5:30–7:00 → LR 2
+
+-- SATURDAY (day_ID = 6)
+(6, (SELECT subject_ID FROM Subject WHERE subject_code='IT 311'), (SELECT section_ID FROM Section WHERE section_name='IT 3C'), (SELECT person_ID FROM Person WHERE person_username='arip.ja@example.com'), 4, 7, 4, 'Occupied'), -- 8:30–10:00 → LR 2
+(6, (SELECT subject_ID FROM Subject WHERE subject_code='IT 311'), (SELECT section_ID FROM Section WHERE section_name='IT 3A'), (SELECT person_ID FROM Person WHERE person_username='arip.ja@example.com'), 10, 13, 4, 'Occupied'), -- 11:30–1:00 → LR 2
+(6, (SELECT subject_ID FROM Subject WHERE subject_code='IT 311'), (SELECT section_ID FROM Section WHERE section_name='IT 3B'), (SELECT person_ID FROM Person WHERE person_username='arip.ja@example.com'), 16, 19, 4, 'Occupied'), -- 2:30–4:00 → LR 2
+(6, (SELECT subject_ID FROM Subject WHERE subject_code='ACT 115'), (SELECT section_ID FROM Section WHERE section_name='NW 1A'), (SELECT person_ID FROM Person WHERE person_username='balan@example.com'), 19, 22, 4, 'Occupied'); -- 5:30–7:00 → LR 2
+
+-- LR 3
+-- MONDAY (day_ID = 1)
+(1, (SELECT subject_ID FROM Subject WHERE subject_code='IT 145'), (SELECT section_ID FROM Section WHERE section_name='IT 4C'), (SELECT person_ID FROM Person WHERE person_username='balan@example.com'), 1, 4, 5, 'Occupied'), -- 7:00–8:30 → LR 3
+(1, (SELECT subject_ID FROM Subject WHERE subject_code='OS 137'), (SELECT section_ID FROM Section WHERE section_name='CS 3A'), (SELECT person_ID FROM Person WHERE person_username='arip.e@example.com'), 7, 10, 5, 'Occupied'), -- 10:00–11:30 → LR 3
+(1, (SELECT subject_ID FROM Subject WHERE subject_code='IT 313'), (SELECT section_ID FROM Section WHERE section_name='IT 3B'), (SELECT person_ID FROM Person WHERE person_username='banquerigo@example.com'), 10, 13, 5, 'Occupied'), -- 11:30–1:00 → LR 3
+(1, (SELECT subject_ID FROM Subject WHERE subject_code='DS 111'), (SELECT section_ID FROM Section WHERE section_name='AD 1B'), (SELECT person_ID FROM Person WHERE person_username='lines@example.com'), 13, 16, 5, 'Occupied'), -- 1:00–2:30 → LR 3
+(1, (SELECT subject_ID FROM Subject WHERE subject_code='CC 101'), (SELECT section_ID FROM Section WHERE section_name='AD 1A'), (SELECT person_ID FROM Person WHERE person_username='rojas@example.com'), 16, 19, 5, 'Occupied'), -- 2:30–4:00 → LR 3
+(1, (SELECT subject_ID FROM Subject WHERE subject_code='IT 212'), (SELECT section_ID FROM Section WHERE section_name='IT 2'), (SELECT person_ID FROM Person WHERE person_username='escorial.j@example.com'), 19, 22, 5, 'Occupied'), -- 4:00–5:30 → LR 3
+
+-- TUESDAY (day_ID = 2)
+(2, (SELECT subject_ID FROM Subject WHERE subject_code='CSE 131'), (SELECT section_ID FROM Section WHERE section_name='CS 3B'), (SELECT person_ID FROM Person WHERE person_username='lorenzo.jez@example.com'), 4, 7, 5, 'Occupied'), -- 8:30–10:00 → LR 3
+(2, (SELECT subject_ID FROM Subject WHERE subject_code='CC 101'), (SELECT section_ID FROM Section WHERE section_name='AD 1B'), (SELECT person_ID FROM Person WHERE person_username='rojas@example.com'), 7, 10, 5, 'Occupied'), -- 10:00–11:30 → LR 3
+(2, (SELECT subject_ID FROM Subject WHERE subject_code='IT 143'), (SELECT section_ID FROM Section WHERE section_name='IT 4C'), (SELECT person_ID FROM Person WHERE person_username='lorenzo.jen@example.com'), 10, 13, 5, 'Occupied'), -- 11:30–1:00 → LR 3
+(2, (SELECT subject_ID FROM Subject WHERE subject_code='CC 104'), (SELECT section_ID FROM Section WHERE section_name='IT 2'), (SELECT person_ID FROM Person WHERE person_username='jaafar@example.com'), 13, 16, 5, 'Occupied'), -- 1:00–2:30 → LR 3
+(2, (SELECT subject_ID FROM Subject WHERE subject_code='CC 101'), (SELECT section_ID FROM Section WHERE section_name='IT 1A'), (SELECT person_ID FROM Person WHERE person_username='rojas@example.com'), 19, 22, 5, 'Occupied'), -- 4:00–5:30 → LR 3
+
+-- WEDNESDAY (day_ID = 3)
+(3, (SELECT subject_ID FROM Subject WHERE subject_code='OS 137'), (SELECT section_ID FROM Section WHERE section_name='CS 3B'), (SELECT person_ID FROM Person WHERE person_username='arip.e@example.com'), 7, 10, 5, 'Occupied'), -- 10:00–11:30 → LR 3
+(3, (SELECT subject_ID FROM Subject WHERE subject_code='CC 104'), (SELECT section_ID FROM Section WHERE section_name='NW 2'), (SELECT person_ID FROM Person WHERE person_username='jaafar@example.com'), 10, 13, 5, 'Occupied'), -- 11:30–1:00 → LR 3
+(3, (SELECT subject_ID FROM Subject WHERE subject_code='CSE 133'), (SELECT section_ID FROM Section WHERE section_name='CS 3B'), (SELECT person_ID FROM Person WHERE person_username='tahil@example.com'), 16, 19, 5, 'Occupied'), -- 2:30–4:00 → LR 3
+
+-- THURSDAY (day_ID = 4)
+(4, (SELECT subject_ID FROM Subject WHERE subject_code='CC 103'), (SELECT section_ID FROM Section WHERE section_name='CS 2'), (SELECT person_ID FROM Person WHERE person_username='lorenzo.jen@example.com'), 1, 4, 5, 'Occupied'), -- 7:00–8:30 → LR 3
+(4, (SELECT subject_ID FROM Subject WHERE subject_code='OS 137'), (SELECT section_ID FROM Section WHERE section_name='CS 3C'), (SELECT person_ID FROM Person WHERE person_username='arip.e@example.com'), 7, 10, 5, 'Occupied'), -- 10:00–11:30 → LR 3
+(4, (SELECT subject_ID FROM Subject WHERE subject_code='CC 103'), (SELECT section_ID FROM Section WHERE section_name='AD 2'), (SELECT person_ID FROM Person WHERE person_username='lorenzo.jen@example.com'), 10, 13, 5, 'Occupied'), -- 11:30–1:00 → LR 3
+(4, (SELECT subject_ID FROM Subject WHERE subject_code='DS 111'), (SELECT section_ID FROM Section WHERE section_name='AD 1B'), (SELECT person_ID FROM Person WHERE person_username='lines@example.com'), 13, 16, 5, 'Occupied'), -- 1:00–2:30 → LR 3
+(4, (SELECT subject_ID FROM Subject WHERE subject_code='CC 101'), (SELECT section_ID FROM Section WHERE section_name='AD 1A'), (SELECT person_ID FROM Person WHERE person_username='rojas@example.com'), 16, 19, 5, 'Occupied'), -- 2:30–4:00 → LR 3
+(4, (SELECT subject_ID FROM Subject WHERE subject_code='IT 212'), (SELECT section_ID FROM Section WHERE section_name='IT 2'), (SELECT person_ID FROM Person WHERE person_username='escorial.j@example.com'), 19, 22, 5, 'Occupied'), -- 4:00–5:30 → LR 3
+
+-- FRIDAY (day_ID = 5)
+(5, (SELECT subject_ID FROM Subject WHERE subject_code='CSE 131'), (SELECT section_ID FROM Section WHERE section_name='CS 3B'), (SELECT person_ID FROM Person WHERE person_username='lorenzo.jez@example.com'), 4, 7, 5, 'Occupied'), -- 8:30–10:00 → LR 3
+(5, (SELECT subject_ID FROM Subject WHERE subject_code='CC 101'), (SELECT section_ID FROM Section WHERE section_name='AD 1B'), (SELECT person_ID FROM Person WHERE person_username='rojas@example.com'), 7, 10, 5, 'Occupied'), -- 10:00–11:30 → LR 3
+(5, (SELECT subject_ID FROM Subject WHERE subject_code='IT 143'), (SELECT section_ID FROM Section WHERE section_name='IT 4C'), (SELECT person_ID FROM Person WHERE person_username='lorenzo.jen@example.com'), 10, 13, 5, 'Occupied'), -- 11:30–1:00 → LR 3
+(5, (SELECT subject_ID FROM Subject WHERE subject_code='CSE 131'), (SELECT section_ID FROM Section WHERE section_name='CS 3A'), (SELECT person_ID FROM Person WHERE person_username='lorenzo.jez@example.com'), 16, 19, 5, 'Occupied'), -- 2:30–4:00 → LR 3
+
+-- SATURDAY (day_ID = 6)
+(6, (SELECT subject_ID FROM Subject WHERE subject_code='MAD 121'), (SELECT section_ID FROM Section WHERE section_name='AD 2'), (SELECT person_ID FROM Person WHERE person_username='banquerigo@example.com'), 4, 7, 5, 'Occupied'), -- 8:30–10:00 → LR 3
+(6, (SELECT subject_ID FROM Subject WHERE subject_code='ACT 115'), (SELECT section_ID FROM Section WHERE section_name='NW 1B'), (SELECT person_ID FROM Person WHERE person_username='balan@example.com'), 10, 13, 5, 'Occupied'), -- 11:30–1:00 → LR 3
+(6, (SELECT subject_ID FROM Subject WHERE subject_code='MAD 121'), (SELECT section_ID FROM Section WHERE section_name='CS 2'), (SELECT person_ID FROM Person WHERE person_username='banquerigo@example.com'), 16, 19, 5, 'Occupied'); -- 2:30–4:00 → LR 3
+
+-- LR 4
+-- MONDAY (day_ID = 1)
+(1, (SELECT subject_ID FROM Subject WHERE subject_code='IT 312'), (SELECT section_ID FROM Section WHERE section_name='IT 3A'), (SELECT person_ID FROM Person WHERE person_username='arip.jp@example.com'), 7, 10, 6, 'Occupied'), -- 10:00–11:30 → LR 4
+(1, (SELECT subject_ID FROM Subject WHERE subject_code='DS 111'), (SELECT section_ID FROM Section WHERE section_name='CS 1B'), (SELECT person_ID FROM Person WHERE person_username='lines@example.com'), 10, 13, 6, 'Occupied'), -- 11:30–1:00 → LR 4
+(1, (SELECT subject_ID FROM Subject WHERE subject_code='CC 100'), (SELECT section_ID FROM Section WHERE section_name='IT 1A'), (SELECT person_ID FROM Person WHERE person_username='escorial.a@example.com'), 13, 16, 6, 'Occupied'), -- 1:00–2:30 → LR 4
+(1, (SELECT subject_ID FROM Subject WHERE subject_code='CC 100'), (SELECT section_ID FROM Section WHERE section_name='IT 1B'), (SELECT person_ID FROM Person WHERE person_username='escorial.a@example.com'), 19, 22, 6, 'Occupied'), -- 4:00–5:30 → LR 4
+
+-- TUESDAY (day_ID = 2)
+(2, (SELECT subject_ID FROM Subject WHERE subject_code='CSE 133'), (SELECT section_ID FROM Section WHERE section_name='CS 3C'), (SELECT person_ID FROM Person WHERE person_username='tahil@example.com'), 7, 10, 6, 'Occupied'), -- 10:00–11:30 → LR 4
+(2, (SELECT subject_ID FROM Subject WHERE subject_code='IT 312'), (SELECT section_ID FROM Section WHERE section_name='IT 3B'), (SELECT person_ID FROM Person WHERE person_username='arip.jp@example.com'), 13, 16, 6, 'Occupied'), -- 1:00–2:30 → LR 4
+(2, (SELECT subject_ID FROM Subject WHERE subject_code='SIPP 125'), (SELECT section_ID FROM Section WHERE section_name='CS 2'), (SELECT person_ID FROM Person WHERE person_username='lorenzo.jen@example.com'), 16, 19, 6, 'Occupied'), -- 2:30–4:00 → LR 4
+
+-- WEDNESDAY (day_ID = 3)
+(3, (SELECT subject_ID FROM Subject WHERE subject_code='IT 314'), (SELECT section_ID FROM Section WHERE section_name='IT 3A'), (SELECT person_ID FROM Person WHERE person_username='escorial.j@example.com'), 7, 10, 6, 'Occupied'), -- 10:00–11:30 → LR 4
+(3, (SELECT subject_ID FROM Subject WHERE subject_code='IT 145'), (SELECT section_ID FROM Section WHERE section_name='IT 4A'), (SELECT person_ID FROM Person WHERE person_username='balan@example.com'), 10, 13, 6, 'Occupied'), -- 11:30–1:00 → LR 4
+(3, (SELECT subject_ID FROM Subject WHERE subject_code='CC 100'), (SELECT section_ID FROM Section WHERE section_name='NW 1A'), (SELECT person_ID FROM Person WHERE person_username='escorial.a@example.com'), 16, 19, 6, 'Occupied'), -- 2:30–4:00 → LR 4
+(3, (SELECT subject_ID FROM Subject WHERE subject_code='CC 100'), (SELECT section_ID FROM Section WHERE section_name='NW 1B'), (SELECT person_ID FROM Person WHERE person_username='arip.jp@example.com'), 19, 22, 6, 'Occupied'), -- 4:00–5:30 → LR 4
+
+-- THURSDAY (day_ID = 4)
+(4, (SELECT subject_ID FROM Subject WHERE subject_code='ACT 215'), (SELECT section_ID FROM Section WHERE section_name='NW 2'), (SELECT person_ID FROM Person WHERE person_username='arip.jp@example.com'), 7, 10, 6, 'Occupied'), -- 10:00–11:30 → LR 4
+(4, (SELECT subject_ID FROM Subject WHERE subject_code='DS 111'), (SELECT section_ID FROM Section WHERE section_name='CS 1B'), (SELECT person_ID FROM Person WHERE person_username='lines@example.com'), 10, 13, 6, 'Occupied'), -- 11:30–1:00 → LR 4
+(4, (SELECT subject_ID FROM Subject WHERE subject_code='ACT 116'), (SELECT section_ID FROM Section WHERE section_name='NW 1B'), (SELECT person_ID FROM Person WHERE person_username='escorial.a@example.com'), 16, 19, 6, 'Occupied'), -- 2:30–4:00 → LR 4
+(4, (SELECT subject_ID FROM Subject WHERE subject_code='CC 103'), (SELECT section_ID FROM Section WHERE section_name='NW 2'), (SELECT person_ID FROM Person WHERE person_username='lorenzo.jen@example.com'), 19, 22, 6, 'Occupied'), -- 4:00–5:30 → LR 4
+
+-- FRIDAY (day_ID = 5)
+(5, (SELECT subject_ID FROM Subject WHERE subject_code='IT 314'), (SELECT section_ID FROM Section WHERE section_name='IT 3B'), (SELECT person_ID FROM Person WHERE person_username='escorial.j@example.com'), 7, 10, 6, 'Occupied'), -- 10:00–11:30 → LR 4
+(5, (SELECT subject_ID FROM Subject WHERE subject_code='IT 213'), (SELECT section_ID FROM Section WHERE section_name='IT 2'), (SELECT person_ID FROM Person WHERE person_username='arip.ja@example.com'), 13, 16, 6, 'Occupied'), -- 1:00–2:30 → LR 4
+(5, (SELECT subject_ID FROM Subject WHERE subject_code='SIPP 125'), (SELECT section_ID FROM Section WHERE section_name='CS 2'), (SELECT person_ID FROM Person WHERE person_username='lorenzo.jen@example.com'), 16, 19, 6, 'Occupied'), -- 2:30–4:00 → LR 4
+
+-- SATURDAY (day_ID = 6)
+(6, (SELECT subject_ID FROM Subject WHERE subject_code='FIL 101'), (SELECT section_ID FROM Section WHERE section_name='IT 1B'), NULL, 4, 7, 6, 'Occupied'); -- 8:30–10:00 → LR 4
+
+-- LR 5
+-- MONDAY (day_ID = 1)
+(1, (SELECT subject_ID FROM Subject WHERE subject_code='CSE 131'), (SELECT section_ID FROM Section WHERE section_name='CS 3C'), (SELECT person_ID FROM Person WHERE person_username='lorenzo.jez@example.com'), 7, 10, 7, 'Occupied'), -- 10:00–11:30 → LR 5
+(1, (SELECT subject_ID FROM Subject WHERE subject_code='CC 100'), (SELECT section_ID FROM Section WHERE section_name='AD 1B'), (SELECT person_ID FROM Person WHERE person_username='balan@example.com'), 10, 13, 7, 'Occupied'), -- 11:30–1:00 → LR 5
+(1, (SELECT subject_ID FROM Subject WHERE subject_code='CC 105'), (SELECT section_ID FROM Section WHERE section_name='IT 3B'), (SELECT person_ID FROM Person WHERE person_username='saavedra@example.com'), 16, 19, 7, 'Occupied'), -- 2:30–4:00 → LR 5
+(1, (SELECT subject_ID FROM Subject WHERE subject_code='DS 111'), (SELECT section_ID FROM Section WHERE section_name='AD 1A'), (SELECT person_ID FROM Person WHERE person_username='lines@example.com'), 19, 22, 7, 'Occupied'), -- 4:00–5:30 → LR 5
+
+-- TUESDAY (day_ID = 2)
+(2, (SELECT subject_ID FROM Subject WHERE subject_code='IT 312'), (SELECT section_ID FROM Section WHERE section_name='IT 3A'), (SELECT person_ID FROM Person WHERE person_username='arip.jp@example.com'), 1, 4, 7, 'Occupied'), -- 7:00–8:30 → LR 5
+(2, (SELECT subject_ID FROM Subject WHERE subject_code='ACT 116'), (SELECT section_ID FROM Section WHERE section_name='NW 1A'), (SELECT person_ID FROM Person WHERE person_username='escorial.a@example.com'), 7, 10, 7, 'Occupied'), -- 10:00–11:30 → LR 5
+(2, (SELECT subject_ID FROM Subject WHERE subject_code='IT 313'), (SELECT section_ID FROM Section WHERE section_name='IT 3A'), (SELECT person_ID FROM Person WHERE person_username='banquerigo@example.com'), 10, 13, 7, 'Occupied'), -- 11:30–1:00 → LR 5
+(2, (SELECT subject_ID FROM Subject WHERE subject_code='ACT 116'), (SELECT section_ID FROM Section WHERE section_name='NW 1A'), (SELECT person_ID FROM Person WHERE person_username='escorial.a@example.com'), 16, 19, 7, 'Occupied'), -- 2:30–4:00 → LR 5
+(2, (SELECT subject_ID FROM Subject WHERE subject_code='IT 143'), (SELECT section_ID FROM Section WHERE section_name='IT 4B'), (SELECT person_ID FROM Person WHERE person_username='lorenzo.jen@example.com'), 19, 22, 7, 'Occupied'), -- 4:00–5:30 → LR 5
+
+-- WEDNESDAY (day_ID = 3)
+(3, (SELECT subject_ID FROM Subject WHERE subject_code='CSE 133'), (SELECT section_ID FROM Section WHERE section_name='CS 3A'), (SELECT person_ID FROM Person WHERE person_username='tahil@example.com'), 7, 10, 7, 'Occupied'), -- 10:00–11:30 → LR 5
+(3, (SELECT subject_ID FROM Subject WHERE subject_code='CC 103'), (SELECT section_ID FROM Section WHERE section_name='IT 2'), (SELECT person_ID FROM Person WHERE person_username='loenzo.jen@example.com'), 10, 13, 7, 'Occupied'), -- 11:30–1:00 → LR 5
+(3, (SELECT subject_ID FROM Subject WHERE subject_code='CC 105'), (SELECT section_ID FROM Section WHERE section_name='IT 3C'), (SELECT person_ID FROM Person WHERE person_username='saavedra@example.com'), 16, 19, 7, 'Occupied'), -- 2:30–4:00 → LR 5
+
+-- THURSDAY (day_ID = 4)
+(4, (SELECT subject_ID FROM Subject WHERE subject_code='ACT 116'), (SELECT section_ID FROM Section WHERE section_name='NW 1B'), (SELECT person_ID FROM Person WHERE person_username='escorial.a@example.com'), 7, 10, 7, 'Occupied'), -- 10:00–11:30 → LR 5
+(4, (SELECT subject_ID FROM Subject WHERE subject_code='IT 313'), (SELECT section_ID FROM Section WHERE section_name='IT 3C'), (SELECT person_ID FROM Person WHERE person_username='banquerigo@example.com'), 10, 13, 7, 'Occupied'), -- 11:30–1:00 → LR 5
+(4, (SELECT subject_ID FROM Subject WHERE subject_code='CC 105'), (SELECT section_ID FROM Section WHERE section_name='IT 3A'), (SELECT person_ID FROM Person WHERE person_username='saavedra@example.com'), 16, 19, 7, 'Occupied'), -- 2:30–4:00 → LR 5
+(4, (SELECT subject_ID FROM Subject WHERE subject_code='DS 111'), (SELECT section_ID FROM Section WHERE section_name='AD 1A'), (SELECT person_ID FROM Person WHERE person_username='lines@example.com'), 19, 22, 7, 'Occupied'), -- 4:00–5:30 → LR 5
+
+-- FRIDAY (day_ID = 5)
+(5, (SELECT subject_ID FROM Subject WHERE subject_code='CC 101'), (SELECT section_ID FROM Section WHERE section_name='CS 1B'), (SELECT person_ID FROM Person WHERE person_username='jaafar@example.com'), 4, 7, 7, 'Occupied'), -- 8:30–10:00 → LR 5
+(5, (SELECT subject_ID FROM Subject WHERE subject_code='CC 101'), (SELECT section_ID FROM Section WHERE section_name='CS 1A'), (SELECT person_ID FROM Person WHERE person_username='jaafar@example.com'), 10, 13, 7, 'Occupied'), -- 11:30–1:00 → LR 5
+(5, (SELECT subject_ID FROM Subject WHERE subject_code='IT 314'), (SELECT section_ID FROM Section WHERE section_name='IT 3C'), (SELECT person_ID FROM Person WHERE person_username='escorial.j@example.com'), 16, 19, 7, 'Occupied'), -- 2:30–4:00 → LR 5
+(5, (SELECT subject_ID FROM Subject WHERE subject_code='IT 143'), (SELECT section_ID FROM Section WHERE section_name='IT 4B'), (SELECT person_ID FROM Person WHERE person_username='lorenzo.jen@example.com'), 19, 22, 7, 'Occupied'), -- 4:00–5:30 → LR 5
+
+-- SATURDAY (day_ID = 6)
+(6, (SELECT subject_ID FROM Subject WHERE subject_code='CDI 108'), (SELECT section_ID FROM Section WHERE section_name='CRIM 4A'), (SELECT person_ID FROM Person WHERE person_username='timpangco@example.com'), 7, 10, 7, 'Occupied'), -- 10:00–11:30 → LR 5
+(6, (SELECT subject_ID FROM Subject WHERE subject_code='CDI 108'), (SELECT section_ID FROM Section WHERE section_name='CRIM 4B'), (SELECT person_ID FROM Person WHERE person_username='timpangco@example.com'), 16, 19, 7, 'Occupied'), -- 2:30–4:00 → LR 5
+(6, (SELECT subject_ID FROM Subject WHERE subject_code='CDI 108'), (SELECT section_ID FROM Section WHERE section_name='CRIM 4C'), (SELECT person_ID FROM Person WHERE person_username='timpangco@example.com'), 19, 22, 7, 'Occupied'); -- 5:30–7:00 → LR 5
