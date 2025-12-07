@@ -92,7 +92,7 @@ CREATE TABLE Schedule (
     time_end_ID     INT(11) NOT NULL,   -- e.g.08:30-09:00 → time_ID = 6 (class ends at 08:30)
 
     room_ID         INT(11) NOT NULL,
-    schedule_status ENUM('Completed','Suspended','Cancelled','Pending','On-Going','isDeleted') 
+    schedule_status ENUM('Completed','Suspended','Cancelled','Pending','On-Going','isDeleted', 'Occupied') 
                     NOT NULL DEFAULT 'Pending',
 
     FOREIGN KEY (day_ID)     REFERENCES Day(day_ID),
