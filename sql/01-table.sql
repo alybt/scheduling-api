@@ -47,8 +47,12 @@ CREATE TABLE Person (
 CREATE TABLE Room (
     room_ID INT(11) AUTO_INCREMENT PRIMARY KEY,
     room_name VARCHAR(50) NOT NULL,
-    room_capacity INT(11) DEFAULT NULL
+    room_capacity INT(11) DEFAULT NULL,
+    room_isDeleted TINYINT(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB;
+
+ALTER TABLE Room 
+    ADD INDEX idx_is_deleted (room_isDeleted);
 
 -- ===============================
 -- SECTION
