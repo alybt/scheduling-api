@@ -35,11 +35,13 @@ CREATE TABLE Person (
     person_password VARCHAR(255) NOT NULL,
     account_ID INT(11) NOT NULL,
     name_ID INT(11) NOT NULL,
+    person_isDeleted TINYINT(1) NOT NULL DEFAULT 0,
 
     FOREIGN KEY (account_ID) REFERENCES Account_Type(account_ID),
     FOREIGN KEY (name_ID) REFERENCES Name(name_ID)
 ) ENGINE=InnoDB;
-
+ALTER TABLE Person 
+    ADD INDEX idx_is_deleted (person_isDeleted);
 
 -- ===============================
 -- ROOM
