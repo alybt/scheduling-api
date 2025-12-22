@@ -27,7 +27,12 @@ $sql = "SELECT
             sub.subject_name,
             sec.section_name,
             sec.section_year,
-            CONCAT_WS(' ', n.name_first, n.name_middle, n.name_last, n.name_suffix) AS teacher_name,
+            TRIM(CONCAT_WS(' ', 
+                IFNULL(n.name_first, ''),
+                IFNULL(n.name_middle, ''),
+                IFNULL(n.name_last, ''),
+                IFNULL(n.name_suffix, '')
+            )) AS teacher_name,
             t.person_username AS teacher_email,
             ts.display_name AS time_start,
             te.display_name AS time_end,
@@ -42,7 +47,7 @@ $sql = "SELECT
         JOIN
             Section AS sec ON s.section_ID = sec.section_ID
         JOIN
-            person AS t ON s.teacher_ID = t.person_ID AND t.account_ID = 2
+            person AS t ON s.teacher_ID = t.person_ID
         JOIN
             Name AS n ON t.name_ID = n.name_ID
         JOIN
@@ -52,7 +57,8 @@ $sql = "SELECT
         LEFT JOIN
             Room AS r ON s.room_ID = r.room_ID
         WHERE
-            s.schedule_ID = ?";
+            s.schedule_ID = ?
+            AND t.account_ID = 2";
 
 $stmt = $conn->prepare($sql);
 if (!$stmt) {
@@ -62,13 +68,13 @@ if (!$stmt) {
 
 $stmt->bind_param("i", $scheduleId);
 if (!$stmt->execute()) {
-    echo json_encode(['success' => false, 'message' => 'Database error: ' . $stmt->error]);
+    echo json_encode(['success' => false, 'message' => 'Execution error: ' . $stmt->error]);
     exit();
 }
 
 $result = $stmt->get_result();
 if (!$result) {
-    echo json_encode(['success' => false, 'message' => 'Database error: ' . $stmt->error]);
+    echo json_encode(['success' => false, 'message' => 'Result error: ' . $stmt->error]);
     exit();
 }
 
@@ -77,6 +83,12 @@ $schedule = $result->fetch_assoc();
 if (empty($schedule)) {
     echo json_encode(['success' => false, 'message' => 'Schedule not found']);
 } else {
+    // Ensure all fields have values (avoid null issues)
+    $schedule['section_year'] = isset($schedule['section_year']) ? (int)$schedule['section_year'] : 0;
+    $schedule['teacher_email'] = $schedule['teacher_email'] ?? '';
+    $schedule['room_name'] = $schedule['room_name'] ?? '';
+    $schedule['schedule_status'] = $schedule['schedule_status'] ?? 'Pending';
+    
     echo json_encode([
         'success' => true,
         'schedule' => $schedule
