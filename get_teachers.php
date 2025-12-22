@@ -13,7 +13,11 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     exit();
 }
 
-$sql = "SELECT person_ID AS id, name_ID AS name, person_username AS email FROM person WHERE account_ID = 2 AND person_isDeleted = 0";
+$sql = "SELECT person_ID AS id, CONCAT(
+            COALESCE(n.name_first, ''),
+            IF(n.name_middle IS NOT NULL AND n.name_middle != '', CONCAT(' ', n.name_middle), ''),
+            ' ', COALESCE(n.name_last, '')
+        ) AS teacher_name, person_username AS email FROM person JOIN Name AS n ON person.name_ID = n.name_ID WHERE account_ID = 2 AND person_isDeleted = 0";
 
 $result = $conn->query($sql);
 if (!$result) {
