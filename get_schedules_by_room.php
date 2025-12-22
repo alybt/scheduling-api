@@ -1,23 +1,20 @@
 <?php
 require_once 'config.php';
-
-// Only allow GET requests
-if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
-    http_response_code(405);
-    echo json_encode(['success' => false, 'message' => 'Method not allowed']);
+ 
+header('Content-Type: application/json');
+ 
+if ($_SERVER['REQUEST_METHOD'] !== 'GET') {    echo json_encode(['success' => false, 'message' => 'Method not allowed']);
     exit();
 }
-
-// Check if room_id is provided in the URL
+ 
 if (!isset($_GET['room_id']) || empty($_GET['room_id'])) {
-    http_response_code(400);
     echo json_encode(['success' => false, 'message' => 'Room ID not provided']);
     exit();
 }
 
 $roomId = (int)$_GET['room_id'];
 
-// SQL Query
+// SQL Query remains the same
 $sql = "SELECT
             s.day_name,
             s.start_display,
@@ -38,21 +35,18 @@ $sql = "SELECT
 
 $stmt = $conn->prepare($sql);
 if (!$stmt) {
-    http_response_code(500);
     echo json_encode(['success' => false, 'message' => 'Database error: ' . $conn->error]);
     exit();
 }
 
 $stmt->bind_param("i", $roomId);
 if (!$stmt->execute()) {
-    http_response_code(500);
     echo json_encode(['success' => false, 'message' => 'Database error: ' . $stmt->error]);
     exit();
 }
 
 $result = $stmt->get_result();
 if (!$result) {
-    http_response_code(500);
     echo json_encode(['success' => false, 'message' => 'Database error: ' . $stmt->error]);
     exit();
 }
@@ -63,10 +57,9 @@ while ($row = $result->fetch_assoc()) {
 }
 
 if (empty($schedules)) {
-    http_response_code(404);
+    // Return 'success' => false, but still with a 200 OK status
     echo json_encode(['success' => false, 'message' => 'No schedules found for this room']);
 } else {
-    http_response_code(200);
     echo json_encode([
         'success' => true,
         'schedules' => $schedules
