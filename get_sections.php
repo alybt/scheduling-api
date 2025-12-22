@@ -18,7 +18,7 @@ $teacherId = isset($_GET['teacher_id']) ? (int)$_GET['teacher_id'] : null;
 $subjectId = isset($_GET['subject_id']) ? (int)$_GET['subject_id'] : null;
 
 // Build SQL query based on parameters
-$sql = "SELECT section_ID AS id, section_name AS name, section_year AS year FROM section";
+$sql = "SELECT section_ID AS id, section_name, section_year FROM section";
 $whereConditions = [];
 $params = [];
 $types = '';
