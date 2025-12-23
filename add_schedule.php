@@ -39,7 +39,7 @@ if (empty($day_name) || empty($subject_id) || empty($section_id) || empty($teach
 }
 
 // Prepare and bind
-$stmt = $conn->prepare("INSERT INTO schedules (day_name, subject_id, section_id, teacher_id, start_display, end_display, room_id, schedule_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+$stmt = $conn->prepare("INSERT INTO schedule (day_name, subject_id, section_id, teacher_id, start_display, end_display, room_id, schedule_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 if (!$stmt) {
     echo json_encode(['success' => false, 'message' => 'Database error: ' . $conn->error]);
     exit();

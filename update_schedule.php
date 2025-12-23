@@ -93,7 +93,7 @@ if (empty($updates)) {
 $params[] = $schedule_id;
 $types .= 'i';
 
-$updateQuery = "UPDATE schedules SET " . implode(', ', $updates) . " WHERE schedule_id = ?";
+$updateQuery = "UPDATE schedule SET " . implode(', ', $updates) . " WHERE schedule_id = ?";
 
 $stmt = $conn->prepare($updateQuery);
 if (!$stmt) {

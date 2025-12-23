@@ -13,33 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     exit();
 }
 
-// Get teacher_id and subject_id from query parameters
-$teacherId = isset($_GET['teacher_id']) ? (int)$_GET['teacher_id'] : null;
-$subjectId = isset($_GET['subject_id']) ? (int)$_GET['subject_id'] : null;
-
-// Build SQL query based on parameters
-$sql = "SELECT section_ID AS id, section_name, section_year FROM section";
-$whereConditions = [];
-$params = [];
-$types = '';
-
-if ($teacherId !== null) {
-    $whereConditions[] = "teacher_ID = ?";
-    $params[] = $teacherId;
-    $types .= 'i';
-}
-
-if ($subjectId !== null) {
-    $whereConditions[] = "subject_ID = ?";
-    $params[] = $subjectId;
-    $types .= 'i';
-}
-
-if (!empty($whereConditions)) {
-    $sql .= " WHERE " . implode(' AND ', $whereConditions);
-}
-
-$sql .= " ORDER BY section_name, section_year";
+$sql = "SELECT section_ID AS id, section_name, section_year FROM section ORDER BY section_year ASC, section_name ASC";
 
 $stmt = $conn->prepare($sql);
 if ($stmt === false) {
@@ -47,11 +21,11 @@ if ($stmt === false) {
     exit();
 }
 
-if (!empty($params)) {
-    $stmt->bind_param($types, ...$params);
+if (!$stmt->execute()) {
+    echo json_encode(['success' => false, 'message' => 'Query execution failed: ' . $stmt->error]);
+    exit();
 }
 
-$stmt->execute();
 $result = $stmt->get_result();
 
 if (!$result) {
@@ -63,8 +37,8 @@ $sections = [];
 while ($row = $result->fetch_assoc()) {
     $sections[] = [
         'id' => (int)$row['id'],
-        'name' => $row['name'],
-        'year' => (int)$row['year']
+        'section_name' => $row['section_name'],
+        'section_year' => (int)$row['section_year']
     ];
 }
 
